@@ -1,0 +1,56 @@
+---
+name: University of New South Wales
+description: University of New South Wales public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/unsw-sydney/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      UNSW operates an official Enterprise Developer Portal on Azure API
+      Management (apideveloper.unsw.edu.au), but it is gated — onboarding is
+      request-based and no public API endpoints or base URLs are disclosed, so
+      enterprise APIs could not be exercised. Publicly verified live surfaces are
+      the UNSWorks DSpace 7.0 repository REST API (/server/api returns JSON) and
+      its OAI-PMH endpoint (Identify verb confirmed). Course/timetable/handbook
+      programmatic access exists only via community-maintained (DevSoc, CSESoc)
+      GitHub projects, not official UNSW APIs. No endpoints were fabricated; only
+      URLs returning verified responses are cataloged.
+    endpoints:
+      - url: https://apideveloper.unsw.edu.au/
+        status: 200
+        note: Official Azure API Management developer portal; gated access.
+      - url: https://apideveloper.unsw.edu.au/getting-started
+        status: 200
+        note: Getting started / onboarding documentation.
+      - url: https://apideveloper.unsw.edu.au/signin
+        status: 200
+        note: Sign-in page; no self-service public registration.
+      - url: https://unsworks.unsw.edu.au/server/api
+        status: 200
+        note: DSpace 7.0 REST/HAL API root; returns JSON.
+      - url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
+        status: 200
+        note: Live OAI-PMH 2.0 endpoint; repository name "UNSWorks Repository".
+      - url: https://github.com/devsoc-unsw/timetable-scraper
+        status: 200
+        note: Community timetable scraper/API (DevSoc); unofficial.
+      - url: https://github.com/csesoc/handbook-api
+        status: 200
+        note: Community handbook API (CSESoc); unofficial.
+      - url: https://www.unsw.edu.au/
+        status: 200
+        note: Official institution website.
+      - url: https://www.handbook.unsw.edu.au/
+        status: 200
+        note: Official UNSW Handbook (HTML; no documented public API).
+      - url: https://timetable.unsw.edu.au/
+        status: 200
+        note: Official timetable site (HTML source for community scraper).
+      - url: https://www.linkedin.com/school/unsw/
+        status: 999
+        note: LinkedIn school page exists; 999 is LinkedIn bot-block, not a dead link.
+      - url: https://github.com/unsw
+        status: 200
+        note: Dormant org with a single 2014 test repo; not an active official org.

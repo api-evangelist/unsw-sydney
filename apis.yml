@@ -1,0 +1,121 @@
+---
+aid: unsw-sydney
+name: University of New South Wales
+description: >-
+  The University of New South Wales (UNSW Sydney) is a public research
+  university in Sydney, Australia, ranked #35 in the QS World University
+  Rankings 2025. UNSW operates a gated Enterprise Developer Portal built on
+  Microsoft Azure API Management at apideveloper.unsw.edu.au, exposing internal
+  enterprise APIs for student-data and campus-services integration to authorised
+  developers via a request-based onboarding process. Publicly accessible
+  programmatic surfaces include the UNSWorks institutional repository (DSpace
+  7.0) with a REST API and an OAI-PMH endpoint. Community-maintained APIs for
+  the UNSW timetable and handbook are published by UNSW student societies
+  (DevSoc and CSESoc) on GitHub.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/unsw-sydney/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research
+  - Open Repository
+  - Australia
+  - Sydney
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: unsw-sydney:developer-portal
+    name: UNSW Enterprise Developer Portal
+    description: >-
+      The front-facing developer portal exposing the UNSW Enterprise API gateway,
+      built on Microsoft Azure API Management. It provides API documentation, an
+      interactive API explorer, and subscription management for a growing range
+      of enterprise APIs supporting student-data management and campus-services
+      integration. Access is gated: developers must request authorisation via a
+      registration form rather than self-service sign-up.
+    humanURL: https://apideveloper.unsw.edu.au/
+    tags: [ Developer Portal, Azure API Management, Enterprise, Gated, Integration ]
+    properties:
+      - type: Documentation
+        url: https://apideveloper.unsw.edu.au/getting-started
+      - type: SignUp
+        url: https://apideveloper.unsw.edu.au/signin
+  - aid: unsw-sydney:unsworks-rest
+    name: UNSWorks Repository REST API (DSpace)
+    description: >-
+      UNSWorks is the UNSW institutional research repository running DSpace 7.0.
+      It exposes a public DSpace REST/HAL API at /server/api for programmatic
+      discovery and retrieval of communities, collections, and item metadata for
+      research outputs and theses.
+    humanURL: https://unsworks.unsw.edu.au/
+    baseURL: https://unsworks.unsw.edu.au/server/api
+    tags: [ Repository, DSpace, REST, Research, Metadata ]
+    properties:
+      - type: Documentation
+        url: https://unsworks.unsw.edu.au/server/api
+  - aid: unsw-sydney:unsworks-oai
+    name: UNSWorks Repository OAI-PMH
+    description: >-
+      OAI-PMH 2.0 metadata harvesting endpoint for the UNSWorks Repository,
+      enabling bulk harvesting of research-output and thesis metadata. The
+      Identify verb confirms repository name "UNSWorks Repository" with records
+      dating from 2007.
+    humanURL: https://unsworks.unsw.edu.au/
+    baseURL: https://unsworks.unsw.edu.au/oai/request
+    tags: [ Repository, OAI-PMH, Harvesting, Research, Metadata ]
+    properties:
+      - type: Documentation
+        url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
+  - aid: unsw-sydney:timetable-scraper
+    name: UNSW Timetable API (community)
+    description: >-
+      A community-maintained scraper and public API for UNSW's timetable site
+      (timetable.unsw.edu.au), produced by the UNSW Software Development Society
+      (DevSoc). It powers student projects such as Notangles and Freerooms. This
+      is not an official UNSW-operated API.
+    humanURL: https://github.com/devsoc-unsw/timetable-scraper
+    tags: [ Timetable, Courses, Community, Unofficial, Scraper ]
+    properties:
+      - type: Documentation
+        url: https://github.com/devsoc-unsw/timetable-scraper
+      - type: GitHub
+        url: https://github.com/devsoc-unsw/timetable-scraper
+  - aid: unsw-sydney:handbook-api
+    name: UNSW Handbook API (community)
+    description: >-
+      A community-maintained public API for fetching degree, specialisation, and
+      course information from the UNSW Handbook, published by the UNSW Computer
+      Science and Engineering Society (CSESoc). This is not an official
+      UNSW-operated API.
+    humanURL: https://github.com/csesoc/handbook-api
+    tags: [ Handbook, Courses, Catalog, Community, Unofficial ]
+    properties:
+      - type: Documentation
+        url: https://github.com/csesoc/handbook-api
+      - type: GitHub
+        url: https://github.com/csesoc/handbook-api
+common:
+  - type: Website
+    url: https://www.unsw.edu.au/
+  - type: DeveloperPortal
+    url: https://apideveloper.unsw.edu.au/
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/unsw/
+  - type: GitHub
+    url: https://github.com/devsoc-unsw
+  - type: Plans
+    url: plans/unsw-sydney-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/unsw-sydney-rate-limits.yml
+  - type: FinOps
+    url: finops/unsw-sydney-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
