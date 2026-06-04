@@ -1,0 +1,14 @@
+{
+  "repo": "unsw-sydney",
+  "feeds": [
+    {
+      "source": "https://www.unsw.edu.au/newsroom",
+      "feed_url": "https://www.unsw.edu.au/newsroom",
+      "title": "UNSW Newsroom",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-03T00:00:00Z"
+}

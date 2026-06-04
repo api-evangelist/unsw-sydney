@@ -1,0 +1,65 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "unsw": "https://apideveloper.unsw.edu.au/vocab#",
+    "dc": "http://purl.org/dc/terms/",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+
+    "University": "schema:CollegeOrUniversity",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "logo": "schema:logo",
+    "sameAs": "schema:sameAs",
+    "department": "schema:department",
+    "Repository": "schema:DataCatalog",
+
+    "api": {
+      "@id": "unsw:api",
+      "@container": "@set"
+    },
+    "humanURL": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "baseURL": {
+      "@id": "unsw:baseURL",
+      "@type": "@id"
+    },
+
+    "Community": "unsw:Community",
+    "Collection": "schema:Collection",
+    "Item": "schema:CreativeWork",
+
+    "uuid": "unsw:uuid",
+    "handle": "unsw:handle",
+    "type": "unsw:objectType",
+    "metadata": "unsw:metadata",
+    "dcTitle": "dc:title",
+    "dcDescription": "dc:description",
+    "dcIdentifierUri": {
+      "@id": "dc:identifier",
+      "@type": "@id"
+    },
+
+    "earliestDatestamp": {
+      "@id": "unsw:earliestDatestamp",
+      "@type": "schema:DateTime"
+    },
+    "protocolVersion": "unsw:protocolVersion",
+    "granularity": "unsw:granularity"
+  },
+  "@type": "University",
+  "name": "University of New South Wales",
+  "url": "https://www.unsw.edu.au/",
+  "sameAs": [
+    "https://www.linkedin.com/school/unsw/",
+    "https://github.com/devsoc-unsw"
+  ],
+  "department": {
+    "@type": "Repository",
+    "name": "UNSWorks Repository",
+    "url": "https://unsworks.unsw.edu.au/",
+    "baseURL": "https://unsworks.unsw.edu.au/server/api"
+  }
+}
