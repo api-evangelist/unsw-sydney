@@ -43,7 +43,7 @@ apis:
     properties:
       - type: Documentation
         url: https://apideveloper.unsw.edu.au/getting-started
-      - type: SignUp
+      - type: Signup
         url: https://apideveloper.unsw.edu.au/signin
   - aid: unsw-sydney:unsworks-rest
     name: UNSWorks Repository REST API (DSpace)
