@@ -100,6 +100,8 @@ apis:
       - type: GitHub
         url: https://github.com/csesoc/handbook-api
 common:
+  - type: DomainSecurity
+    url: security/unsw-sydney-domain-security.yml
   - type: Website
     url: https://www.unsw.edu.au/
   - type: DeveloperPortal
