@@ -4,12 +4,18 @@
     {
       "source": "https://www.unsw.edu.au/newsroom",
       "feed_url": "https://www.unsw.edu.au/newsroom",
-      "title": "UNSW Newsroom",
+      "title": "",
       "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "method": "none"
+    },
+    {
+      "source": "https://www.unsw.edu.au/myit",
+      "feed_url": "https://www.unsw.edu.au/myit",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-08-15T12:11:08Z"
+  "fetched": "2026-08-22T20:20:02Z"
 }
