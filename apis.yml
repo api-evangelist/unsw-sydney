@@ -55,268 +55,304 @@ created: '2026-06-03'
 modified: '2026-08-19'
 specificationVersion: '0.23'
 apis:
-  - aid: unsw-sydney:unsworks-rest
-    name: UNSWorks Repository REST API (DSpace 7.0)
-    x-operator: institution
-    x-operator-evidence: >-
-      unsworks.unsw.edu.au is under the institution's own registrable domain and resolves to a
-      UNSW-controlled A record (54.253.215.118), not a vendor CNAME. The repository's own OAI-PMH
-      Identify response names it "UNSWorks Repository" with adminEmail
-      lib.repository.alerts@unsw.edu.au. DSpace is open-source software; the deployment is UNSW's.
-    description: >-
-      UNSWorks is the UNSW open-access institutional repository, running DSpace 7.0 on UNSW
-      infrastructure and administered by the UNSW Library. The HAL/REST server at /server/api is
-      readable without credentials for the service document, communities, collections, the metadata
-      registry, entity types and discovery search; unbounded item and bitstream browse return 401.
-      Objects are identified by CNRI handles under the UNSW-registered prefix 1959.4. No OpenAPI is
-      published by UNSW — the specification in this repository was derived from live probes.
-    humanURL: https://unsworks.unsw.edu.au/
-    baseURL: https://unsworks.unsw.edu.au/server/api
-    tags:
-      - Research Repository
-      - DSpace
-      - REST
-      - Metadata
-      - Open Access
-    properties:
-      - type: OpenAPI
-        url: openapi/unsw-sydney-unsworks-dspace-openapi.yml
-      - type: JSONSchema
-        url: json-schema/unsw-sydney-unsworks-dspace-schema.json
-      - type: Examples
-        url: examples/unsw-sydney-unsworks-dspace-example.json
-      - type: Vocabulary
-        url: vocabulary/unsw-sydney-unsworks-vocabulary.yml
-      - type: Authentication
-        url: authentication/unsw-sydney-authentication.yml
-      - type: Errors
-        url: errors/unsw-sydney-errors.yml
-      - type: Documentation
-        url: https://unsworks.unsw.edu.au/server/api
-  - aid: unsw-sydney:unsworks-oai
-    name: UNSWorks Repository OAI-PMH
-    x-operator: institution
-    x-operator-evidence: >-
-      The endpoint's own Identify response declares baseURL https://unsworks.unsw.edu.au/oai/request
-      and repositoryIdentifier unsworks.library.unsw.edu.au, under the institution's registrable
-      domain, with a unsw.edu.au administrative contact.
-    description: >-
-      OAI-PMH 2.0 metadata harvesting endpoint for UNSWorks. Fully anonymous. All six verbs were
-      exercised live and answer with a well-formed envelope; twelve metadata formats are offered
-      (oai_dc, qdc, uketd_dc, didl, mods, ore, mets, rdf, marc, xoai, dim, etdms) and sets are keyed
-      on the UNSW handle prefix. Earliest record datestamp is 2007-11-06. This is the institution's
-      strongest domain-standard conformance under the Kin Score education regime.
-    humanURL: https://unsworks.unsw.edu.au/
-    baseURL: https://unsworks.unsw.edu.au/oai/request
-    tags:
-      - Research Repository
-      - OAI-PMH
-      - Harvesting
-      - Metadata
-      - Open Access
-    properties:
-      - type: OpenAPI
-        url: openapi/unsw-sydney-unsworks-oai-pmh-openapi.yml
-      - type: Examples
-        url: examples/unsw-sydney-unsworks-oai-identify-example.xml
-      - type: Conformance
-        url: conformance/unsw-sydney-education-standards-conformance.yml
-      - type: Errors
-        url: errors/unsw-sydney-errors.yml
-      - type: Documentation
-        url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
-  - aid: unsw-sydney:shibboleth-idp
-    name: UNSW Shibboleth Identity Provider (AAF / eduGAIN)
-    x-operator: institution
-    x-operator-evidence: >-
-      entityID https://aaf.unsw.edu.au/idp/shibboleth, served from the institution's own domain and
-      registered in the Australian Access Federation aggregate with OrganizationName "The University
-      of New South Wales" and mdui:DisplayName "The University of New South Wales (UNSW)". The
-      asserted shibmd:Scope is unsw.edu.au.
-    description: >-
-      UNSW's own SAML 2.0 identity provider — a Shibboleth IdP whose entity metadata is published
-      as a machine-readable XML document at the entityID URL and is carried in the AAF federation
-      aggregate, which participates in eduGAIN. SingleSignOnService endpoints are exposed over
-      HTTP-POST and HTTP-Redirect bindings. This is institution-operated by definition and is the
-      class of surface a university runs itself even when every application on top is a vendor's.
-      A second UNSW-operated entity, the AC Lab System service provider at
-      sp.acls.analytical.unsw.edu.au, is registered in the same federation with OrganizationName
-      unsw.edu.au.
-    humanURL: https://aaf.edu.au/
-    baseURL: https://aaf.unsw.edu.au/idp/shibboleth
-    tags:
-      - Identity Federation
-      - Shibboleth
-      - SAML
-      - Single Sign-On
-      - eduGAIN
-    properties:
-      - type: Examples
-        url: examples/unsw-sydney-shibboleth-idp-metadata-example.xml
-      - type: Conformance
-        url: conformance/unsw-sydney-education-standards-conformance.yml
-      - type: Authentication
-        url: authentication/unsw-sydney-authentication.yml
-      - type: Documentation
-        url: https://md.aaf.edu.au/aaf-metadata.xml
-  - aid: unsw-sydney:developer-portal
-    name: UNSW Enterprise Developer Portal
-    x-operator: institution
-    x-operator-evidence: >-
-      apideveloper.unsw.edu.au is under the institution's own registrable domain and is branded with
-      UNSW's own logo. The underlying product is Microsoft Azure API Management, but the gateway,
-      the catalogue and the onboarding process are UNSW's.
-    description: >-
-      The front door to UNSW's Enterprise API Gateway, built on Microsoft Azure API Management.
-      Cataloguing it is a statement about the gate, not about the APIs behind it: /apis returns 404,
-      there is no self-service signup, no base URL is published, and the portal's own text states
-      that consumers "will not be able to try out the APIs in the Developer Portal, due to security
-      constraints of the organisation." Provider and consumer onboarding both run through request
-      forms, an internal cyber review and manually issued credentials. Nothing about the number,
-      shape or lifecycle of the APIs behind the gate is publicly knowable, and this profile makes no
-      claim about them.
-    humanURL: https://apideveloper.unsw.edu.au/
-    tags:
-      - Developer Portal
-      - Azure API Management
-      - Enterprise
-      - Gated
-      - Integration
-    properties:
-      - type: Documentation
-        url: https://apideveloper.unsw.edu.au/getting-started
-      - type: Signup
-        url: https://apideveloper.unsw.edu.au/signin
-      - type: Support
-        url: https://apideveloper.unsw.edu.au/contact-us
-      - type: Authentication
-        url: authentication/unsw-sydney-authentication.yml
-  - aid: unsw-sydney:moodle-lti
-    name: Moodle @ UNSW (TELT) — LTI 1.3 platform
-    x-operator: tenant
-    x-operator-evidence: >-
-      Hostname moodle.telt.unsw.edu.au is under unsw.edu.au, but the matching service-provider entity
-      in the AAF federation metadata declares OrganizationName ltgplc.com / "Learning Technologies
-      Group Pty Ltd" (Open LMS) as the operating organisation, and a staging twin exists at
-      unsw-mdl-stage.enter.openlms.cloud. Vendor platform, institution-specific hostname.
-    description: >-
-      UNSW's learning management system, operated for UNSW by Open LMS. It is a live, conformant
-      1EdTech LTI 1.3 platform: the public keyset at /mod/lti/certs.php serves RS256 JWKs, the
-      authorisation endpoint at /mod/lti/auth.php answers, and the token endpoint at
-      /mod/lti/token.php is present and rejects an empty grant. A Moodle web-service endpoint exists
-      but issues tokens only internally. Recorded as a tenant relationship: the LTI conformance is
-      real and belongs on UNSW's profile, the contract belongs to Moodle.
-    humanURL: https://moodle.telt.unsw.edu.au/
-    baseURL: https://moodle.telt.unsw.edu.au/mod/lti
-    tags:
-      - Learning Management
-      - LTI
-      - Moodle
-      - Tenant
-      - Teaching
-    properties:
-      - type: Examples
-        url: examples/unsw-sydney-moodle-lti-jwks-example.json
-      - type: Conformance
-        url: conformance/unsw-sydney-education-standards-conformance.yml
-      - type: Documentation
-        url: https://moodle.telt.unsw.edu.au/mod/lti/certs.php
-  - aid: unsw-sydney:primo-discovery
-    name: UNSW Library discovery (Ex Libris Primo VE)
-    x-operator: tenant
-    x-operator-evidence: >-
-      Hosted on the shared vendor host unsw.primo.exlibrisgroup.com under an institution-specific
-      view identifier, vid=61UNSW_INST:UNSWS. The data is UNSW's; the platform, the host and the
-      contract are Ex Libris's.
-    description: >-
-      UNSW Library's discovery layer runs on Ex Libris Primo VE. This entry records the tenancy so
-      the relationship is visible in the catalogue; no Ex Libris specification is saved under this
-      institution's slug. Any Primo or Alma API contract belongs on Ex Libris's own profile, and
-      crediting UNSW for it would be exactly the misattribution this pipeline exists to prevent.
-    humanURL: https://www.library.unsw.edu.au/
-    baseURL: https://unsw.primo.exlibrisgroup.com/discovery/search?vid=61UNSW_INST:UNSWS
-    tags:
-      - Library
-      - Discovery
-      - Ex Libris
-      - Primo
-      - Tenant
-    properties:
-      - type: Documentation
-        url: https://www.library.unsw.edu.au/
-  - aid: unsw-sydney:freerooms
-    name: Freerooms API (DevSoc, community)
-    x-operator: tenant
-    x-operator-evidence: >-
-      Operated by the UNSW Software Development Society on the non-institution domain devsoc.app.
-      Built on UNSW timetable and room data; not operated, endorsed or supported by UNSW.
-    description: >-
-      A live student-society API exposing UNSW campus buildings and teaching rooms with coordinates,
-      capacity, school and usage type — the campus-life surface class, built by students rather than
-      by the institution. Confirmed live: /api/buildings and /api/rooms both return JSON without
-      credentials. This is the working successor to the archived timetable-scraper, and it is
-      credited as a tenant relationship, never as a UNSW-operated API.
-    humanURL: https://freerooms.devsoc.app/
-    baseURL: https://freerooms.devsoc.app/api
-    tags:
-      - Campus Life
-      - Room Booking
-      - Timetable
-      - Community
-      - Unofficial
-    properties:
-      - type: Documentation
-        url: https://freerooms.devsoc.app/
-      - type: GitHub
-        url: https://github.com/devsoc-unsw
-      - type: Lifecycle
-        url: lifecycle/unsw-sydney-lifecycle.yml
-  - aid: unsw-sydney:timetable-scraper
-    name: UNSW Timetable API (DevSoc, community) — ARCHIVED
-    x-operator: tenant
-    x-operator-evidence: >-
-      UNSW Software Development Society project on github.com; the institution neither operates nor
-      endorses it.
-    description: >-
-      A scraper and public API for UNSW's timetable site, produced by the UNSW Software Development
-      Society. ARCHIVED BY ITS OWNER ON 2026-04-05 and now read-only. The June 2026 profile of this
-      institution listed it as a live surface; that is corrected here. Retained as a lifecycle
-      record, not as a current surface.
-    humanURL: https://github.com/devsoc-unsw/timetable-scraper
-    tags:
-      - Timetable
-      - Course Catalog
-      - Community
-      - Unofficial
-      - Archived
-    properties:
-      - type: GitHub
-        url: https://github.com/devsoc-unsw/timetable-scraper
-      - type: Lifecycle
-        url: lifecycle/unsw-sydney-lifecycle.yml
-  - aid: unsw-sydney:handbook-api
-    name: UNSW Handbook API (CSESoc, community) — ARCHIVED
-    x-operator: tenant
-    x-operator-evidence: >-
-      UNSW Computer Science and Engineering Society project on github.com; the institution neither
-      operates nor endorses it.
-    description: >-
-      A public API for fetching degree, specialisation and course information from the UNSW
-      Handbook, published by the UNSW Computer Science and Engineering Society. ARCHIVED BY ITS
-      OWNER ON 2026-04-03 and now read-only. The June 2026 profile listed it as live; that is
-      corrected here. Retained as a lifecycle record, not as a current surface.
-    humanURL: https://github.com/csesoc/handbook-api
-    tags:
-      - Handbook
-      - Course Catalog
-      - Community
-      - Unofficial
-      - Archived
-    properties:
-      - type: GitHub
-        url: https://github.com/csesoc/handbook-api
-      - type: Lifecycle
-        url: lifecycle/unsw-sydney-lifecycle.yml
+- aid: unsw-sydney:shibboleth-idp
+  name: UNSW Shibboleth Identity Provider (AAF / eduGAIN)
+  x-operator: institution
+  x-operator-evidence: >-
+    entityID https://aaf.unsw.edu.au/idp/shibboleth, served from the institution's own domain and registered
+    in the Australian Access Federation aggregate with OrganizationName "The University of New South Wales"
+    and mdui:DisplayName "The University of New South Wales (UNSW)". The asserted shibmd:Scope is unsw.edu.au.
+  description: >-
+    UNSW's own SAML 2.0 identity provider — a Shibboleth IdP whose entity metadata is published as a machine-readable
+    XML document at the entityID URL and is carried in the AAF federation aggregate, which participates
+    in eduGAIN. SingleSignOnService endpoints are exposed over HTTP-POST and HTTP-Redirect bindings. This
+    is institution-operated by definition and is the class of surface a university runs itself even when
+    every application on top is a vendor's. A second UNSW-operated entity, the AC Lab System service provider
+    at sp.acls.analytical.unsw.edu.au, is registered in the same federation with OrganizationName unsw.edu.au.
+  humanURL: https://aaf.edu.au/
+  baseURL: https://aaf.unsw.edu.au/idp/shibboleth
+  tags:
+  - Identity Federation
+  - Shibboleth
+  - SAML
+  - Single Sign-On
+  - eduGAIN
+  properties:
+  - type: Examples
+    url: examples/unsw-sydney-shibboleth-idp-metadata-example.xml
+  - type: Conformance
+    url: conformance/unsw-sydney-education-standards-conformance.yml
+  - type: Authentication
+    url: authentication/unsw-sydney-authentication.yml
+  - type: Documentation
+    url: https://md.aaf.edu.au/aaf-metadata.xml
+- aid: unsw-sydney:developer-portal
+  name: UNSW Enterprise Developer Portal
+  x-operator: institution
+  x-operator-evidence: >-
+    apideveloper.unsw.edu.au is under the institution's own registrable domain and is branded with UNSW's
+    own logo. The underlying product is Microsoft Azure API Management, but the gateway, the catalogue
+    and the onboarding process are UNSW's.
+  description: >-
+    The front door to UNSW's Enterprise API Gateway, built on Microsoft Azure API Management. Cataloguing
+    it is a statement about the gate, not about the APIs behind it: /apis returns 404, there is no self-service
+    signup, no base URL is published, and the portal's own text states that consumers "will not be able
+    to try out the APIs in the Developer Portal, due to security constraints of the organisation." Provider
+    and consumer onboarding both run through request forms, an internal cyber review and manually issued
+    credentials. Nothing about the number, shape or lifecycle of the APIs behind the gate is publicly
+    knowable, and this profile makes no claim about them.
+  humanURL: https://apideveloper.unsw.edu.au/
+  tags:
+  - Developer Portal
+  - Azure API Management
+  - Enterprise
+  - Gated
+  - Integration
+  properties:
+  - type: Documentation
+    url: https://apideveloper.unsw.edu.au/getting-started
+  - type: Signup
+    url: https://apideveloper.unsw.edu.au/signin
+  - type: Support
+    url: https://apideveloper.unsw.edu.au/contact-us
+  - type: Authentication
+    url: authentication/unsw-sydney-authentication.yml
+- aid: unsw-sydney:moodle-lti
+  name: Moodle @ UNSW (TELT) — LTI 1.3 platform
+  x-operator: tenant
+  x-operator-evidence: >-
+    Hostname moodle.telt.unsw.edu.au is under unsw.edu.au, but the matching service-provider entity in
+    the AAF federation metadata declares OrganizationName ltgplc.com / "Learning Technologies Group Pty
+    Ltd" (Open LMS) as the operating organisation, and a staging twin exists at unsw-mdl-stage.enter.openlms.cloud.
+    Vendor platform, institution-specific hostname.
+  description: >-
+    UNSW's learning management system, operated for UNSW by Open LMS. It is a live, conformant 1EdTech
+    LTI 1.3 platform: the public keyset at /mod/lti/certs.php serves RS256 JWKs, the authorisation endpoint
+    at /mod/lti/auth.php answers, and the token endpoint at /mod/lti/token.php is present and rejects
+    an empty grant. A Moodle web-service endpoint exists but issues tokens only internally. Recorded as
+    a tenant relationship: the LTI conformance is real and belongs on UNSW's profile, the contract belongs
+    to Moodle.
+  humanURL: https://moodle.telt.unsw.edu.au/
+  baseURL: https://moodle.telt.unsw.edu.au/mod/lti
+  tags:
+  - Learning Management
+  - LTI
+  - Moodle
+  - Tenant
+  - Teaching
+  properties:
+  - type: Examples
+    url: examples/unsw-sydney-moodle-lti-jwks-example.json
+  - type: Conformance
+    url: conformance/unsw-sydney-education-standards-conformance.yml
+  - type: Documentation
+    url: https://moodle.telt.unsw.edu.au/mod/lti/certs.php
+- aid: unsw-sydney:primo-discovery
+  name: UNSW Library discovery (Ex Libris Primo VE)
+  x-operator: tenant
+  x-operator-evidence: >-
+    Hosted on the shared vendor host unsw.primo.exlibrisgroup.com under an institution-specific view identifier,
+    vid=61UNSW_INST:UNSWS. The data is UNSW's; the platform, the host and the contract are Ex Libris's.
+  description: >-
+    UNSW Library's discovery layer runs on Ex Libris Primo VE. This entry records the tenancy so the relationship
+    is visible in the catalogue; no Ex Libris specification is saved under this institution's slug. Any
+    Primo or Alma API contract belongs on Ex Libris's own profile, and crediting UNSW for it would be
+    exactly the misattribution this pipeline exists to prevent.
+  humanURL: https://www.library.unsw.edu.au/
+  baseURL: https://unsw.primo.exlibrisgroup.com/discovery/search?vid=61UNSW_INST:UNSWS
+  tags:
+  - Library
+  - Discovery
+  - Ex Libris
+  - Primo
+  - Tenant
+  properties:
+  - type: Documentation
+    url: https://www.library.unsw.edu.au/
+- aid: unsw-sydney:freerooms
+  name: Freerooms API (DevSoc, community)
+  x-operator: tenant
+  x-operator-evidence: >-
+    Operated by the UNSW Software Development Society on the non-institution domain devsoc.app. Built
+    on UNSW timetable and room data; not operated, endorsed or supported by UNSW.
+  description: >-
+    A live student-society API exposing UNSW campus buildings and teaching rooms with coordinates, capacity,
+    school and usage type — the campus-life surface class, built by students rather than by the institution.
+    Confirmed live: /api/buildings and /api/rooms both return JSON without credentials. This is the working
+    successor to the archived timetable-scraper, and it is credited as a tenant relationship, never as
+    a UNSW-operated API.
+  humanURL: https://freerooms.devsoc.app/
+  baseURL: https://freerooms.devsoc.app/api
+  tags:
+  - Campus Life
+  - Room Booking
+  - Timetable
+  - Community
+  - Unofficial
+  properties:
+  - type: Documentation
+    url: https://freerooms.devsoc.app/
+  - type: GitHub
+    url: https://github.com/devsoc-unsw
+  - type: Lifecycle
+    url: lifecycle/unsw-sydney-lifecycle.yml
+- aid: unsw-sydney:timetable-scraper
+  name: UNSW Timetable API (DevSoc, community) — ARCHIVED
+  x-operator: tenant
+  x-operator-evidence: >-
+    UNSW Software Development Society project on github.com; the institution neither operates nor endorses
+    it.
+  description: >-
+    A scraper and public API for UNSW's timetable site, produced by the UNSW Software Development Society.
+    ARCHIVED BY ITS OWNER ON 2026-04-05 and now read-only. The June 2026 profile of this institution listed
+    it as a live surface; that is corrected here. Retained as a lifecycle record, not as a current surface.
+  humanURL: https://github.com/devsoc-unsw/timetable-scraper
+  tags:
+  - Timetable
+  - Course Catalog
+  - Community
+  - Unofficial
+  - Archived
+  properties:
+  - type: GitHub
+    url: https://github.com/devsoc-unsw/timetable-scraper
+  - type: Lifecycle
+    url: lifecycle/unsw-sydney-lifecycle.yml
+- aid: unsw-sydney:handbook-api
+  name: UNSW Handbook API (CSESoc, community) — ARCHIVED
+  x-operator: tenant
+  x-operator-evidence: >-
+    UNSW Computer Science and Engineering Society project on github.com; the institution neither operates
+    nor endorses it.
+  description: >-
+    A public API for fetching degree, specialisation and course information from the UNSW Handbook, published
+    by the UNSW Computer Science and Engineering Society. ARCHIVED BY ITS OWNER ON 2026-04-03 and now
+    read-only. The June 2026 profile listed it as live; that is corrected here. Retained as a lifecycle
+    record, not as a current surface.
+  humanURL: https://github.com/csesoc/handbook-api
+  tags:
+  - Handbook
+  - Course Catalog
+  - Community
+  - Unofficial
+  - Archived
+  properties:
+  - type: GitHub
+    url: https://github.com/csesoc/handbook-api
+  - type: Lifecycle
+    url: lifecycle/unsw-sydney-lifecycle.yml
+- aid: unsw-sydney:unsw-sydney-core-api
+  name: University of New South Wales Core API
+  description: Communities, collections, sites and the metadata registry.
+  humanURL: https://unsworks.unsw.edu.au/
+  baseURL: https://unsworks.unsw.edu.au/server/api
+  tags:
+  - core
+  properties:
+  - type: OpenAPI
+    url: openapi/unsw-sydney-core-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/unsw-sydney-unsworks-dspace-schema.json
+  - type: Examples
+    url: examples/unsw-sydney-unsworks-dspace-example.json
+  - type: Vocabulary
+    url: vocabulary/unsw-sydney-unsworks-vocabulary.yml
+  - type: Authentication
+    url: authentication/unsw-sydney-authentication.yml
+  - type: Errors
+    url: errors/unsw-sydney-errors.yml
+  - type: Documentation
+    url: https://unsworks.unsw.edu.au/server/api
+  - type: Examples
+    url: examples/unsw-sydney-unsworks-oai-identify-example.xml
+  - type: Conformance
+    url: conformance/unsw-sydney-education-standards-conformance.yml
+  - type: Documentation
+    url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
+- aid: unsw-sydney:unsw-sydney-discover-api
+  name: University of New South Wales Discover API
+  description: Public discovery search over repository objects.
+  humanURL: https://unsworks.unsw.edu.au/
+  baseURL: https://unsworks.unsw.edu.au/server/api
+  tags:
+  - discover
+  properties:
+  - type: OpenAPI
+    url: openapi/unsw-sydney-discover-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/unsw-sydney-unsworks-dspace-schema.json
+  - type: Examples
+    url: examples/unsw-sydney-unsworks-dspace-example.json
+  - type: Vocabulary
+    url: vocabulary/unsw-sydney-unsworks-vocabulary.yml
+  - type: Authentication
+    url: authentication/unsw-sydney-authentication.yml
+  - type: Errors
+    url: errors/unsw-sydney-errors.yml
+  - type: Documentation
+    url: https://unsworks.unsw.edu.au/server/api
+  - type: Examples
+    url: examples/unsw-sydney-unsworks-oai-identify-example.xml
+  - type: Conformance
+    url: conformance/unsw-sydney-education-standards-conformance.yml
+  - type: Documentation
+    url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
+- aid: unsw-sydney:unsw-sydney-oai-pmh-api
+  name: University of New South Wales Oai Pmh API
+  description: OAI-PMH 2.0 verbs, all exercised live against this endpoint.
+  humanURL: https://unsworks.unsw.edu.au/
+  baseURL: https://unsworks.unsw.edu.au/server/api
+  tags:
+  - oai-pmh
+  properties:
+  - type: OpenAPI
+    url: openapi/unsw-sydney-oai-pmh-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/unsw-sydney-unsworks-dspace-schema.json
+  - type: Examples
+    url: examples/unsw-sydney-unsworks-dspace-example.json
+  - type: Vocabulary
+    url: vocabulary/unsw-sydney-unsworks-vocabulary.yml
+  - type: Authentication
+    url: authentication/unsw-sydney-authentication.yml
+  - type: Errors
+    url: errors/unsw-sydney-errors.yml
+  - type: Documentation
+    url: https://unsworks.unsw.edu.au/server/api
+  - type: Examples
+    url: examples/unsw-sydney-unsworks-oai-identify-example.xml
+  - type: Conformance
+    url: conformance/unsw-sydney-education-standards-conformance.yml
+  - type: Documentation
+    url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
+- aid: unsw-sydney:unsw-sydney-root-api
+  name: University of New South Wales Root API
+  description: Service entry point and HAL link index.
+  humanURL: https://unsworks.unsw.edu.au/
+  baseURL: https://unsworks.unsw.edu.au/server/api
+  tags:
+  - root
+  properties:
+  - type: OpenAPI
+    url: openapi/unsw-sydney-root-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/unsw-sydney-unsworks-dspace-schema.json
+  - type: Examples
+    url: examples/unsw-sydney-unsworks-dspace-example.json
+  - type: Vocabulary
+    url: vocabulary/unsw-sydney-unsworks-vocabulary.yml
+  - type: Authentication
+    url: authentication/unsw-sydney-authentication.yml
+  - type: Errors
+    url: errors/unsw-sydney-errors.yml
+  - type: Documentation
+    url: https://unsworks.unsw.edu.au/server/api
+  - type: Examples
+    url: examples/unsw-sydney-unsworks-oai-identify-example.xml
+  - type: Conformance
+    url: conformance/unsw-sydney-education-standards-conformance.yml
+  - type: Documentation
+    url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
 common:
   - type: Website
     url: https://www.unsw.edu.au/
