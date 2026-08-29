@@ -21,6 +21,18 @@ description: >-
   research-data toolkit — or student-society work on non-institution domains. UNSW publishes no
   OpenAPI, no open data portal, no status page, no changelog and no API governance ruleset.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: request-based
