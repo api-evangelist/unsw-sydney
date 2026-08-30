@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unsw-sydney/refs/heads/main/json-schema/unsw-sydney-unsworks-dspace-schema.json",
+  "title": "UNSWorks Repository DSpace 7.0 REST payloads",
+  "description": "Schemas for the payloads actually returned by the institution-operated UNSWorks DSpace REST/HAL server. Derived from live unauthenticated responses on 2026-08-19; no field appears here that was not observed in a real response.",
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": [
+      "https://unsworks.unsw.edu.au/server/api",
+      "https://unsworks.unsw.edu.au/server/api/core/communities?size=2",
+      "https://unsworks.unsw.edu.au/server/api/core/metadataschemas?size=50",
+      "https://unsworks.unsw.edu.au/server/api/core/items/00000000-0000-0000-0000-000000000000"
+    ],
+    "derived_from": "openapi/unsw-sydney-unsworks-dspace-openapi.yml",
+    "x-operator": "institution"
+  },
+  "$defs": {
+    "RootServiceDocument": {
+      "type": "object",
+      "required": ["dspaceUI", "dspaceName", "dspaceServer", "dspaceVersion", "type", "_links"],
+      "properties": {
+        "dspaceUI": { "type": "string", "format": "uri" },
+        "dspaceName": { "type": "string" },
+        "dspaceServer": { "type": "string", "format": "uri" },
+        "dspaceVersion": { "type": "string" },
+        "type": { "const": "root" },
+        "_links": { "$ref": "#/$defs/HalLinks" }
+      }
+    },
+    "HalLinks": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["href"],
+        "properties": {
+          "href": { "type": "string", "format": "uri-template" },
+          "templated": { "type": "boolean" }
+        }
+      }
+    },
+    "MetadataValue": {
+      "type": "object",
+      "required": ["value"],
+      "properties": {
+        "value": { "type": "string" },
+        "language": { "type": ["string", "null"] },
+        "authority": { "type": ["string", "null"] },
+        "confidence": { "type": "integer" },
+        "place": { "type": "integer" }
+      }
+    },
+    "MetadataMap": {
+      "type": "object",
+      "description": "Keyed by qualified metadata field name, e.g. dc.title, dc.identifier.uri, unsw.identifier.doi.",
+      "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/MetadataValue" } }
+    },
+    "Community": {
+      "type": "object",
+      "required": ["uuid", "name", "handle", "type"],
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "uuid": { "type": "string", "format": "uuid" },
+        "name": { "type": "string" },
+        "handle": {
+          "type": "string",
+          "description": "CNRI handle under the UNSW-registered prefix 1959.4.",
+          "pattern": "^1959\\.4/[0-9]+$"
+        },
+        "type": { "const": "community" },
+        "metadata": { "$ref": "#/$defs/MetadataMap" },
+        "_links": { "$ref": "#/$defs/HalLinks" }
+      }
+    },
+    "PageMeta": {
+      "type": "object",
+      "properties": {
+        "size": { "type": "integer" },
+        "totalElements": { "type": "integer" },
+        "totalPages": { "type": "integer" },
+        "number": { "type": "integer" }
+      }
+    },
+    "HalPage": {
+      "type": "object",
+      "properties": {
+        "_embedded": { "type": "object" },
+        "page": { "$ref": "#/$defs/PageMeta" },
+        "_links": { "$ref": "#/$defs/HalLinks" }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "Spring Boot error envelope, captured verbatim from a live 404 on this server.",
+      "required": ["timestamp", "status", "error", "path"],
+      "properties": {
+        "timestamp": { "type": "string", "format": "date-time" },
+        "status": { "type": "integer" },
+        "error": { "type": "string" },
+        "message": { "type": "string" },
+        "path": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": [
+      "https://unsworks.unsw.edu.au/server/api",
+      "https://unsworks.unsw.edu.au/server/api/core/communities?size=2",
+      "https://unsworks.unsw.edu.au/server/api/core/metadataschemas?size=50"
+    ],
+    "note": "Verbatim excerpts of live unauthenticated responses from the institution-operated UNSWorks DSpace 7.0 server. Trimmed for size; values are unmodified.",
+    "x-operator": "institution"
+  },
+  "service_document": {
+    "dspaceUI": "https://unsworks.unsw.edu.au",
+    "dspaceName": "UNSWorks Repository",
+    "dspaceServer": "https://unsworks.unsw.edu.au/server",
+    "dspaceVersion": "DSpace 7.0",
+    "type": "root"
+  },
+  "service_document_link_count": 69,
+  "communities_first_two": [
+    {
+      "uuid": "5519f7e0-ca19-429b-a3d8-536ef5185b85",
+      "name": "Datasets",
+      "handle": "1959.4/3",
+      "type": "community"
+    },
+    {
+      "uuid": "a711cc5c-6177-4cb9-a862-8019a5487598",
+      "name": "Organisation units",
+      "handle": "1959.4/1",
+      "type": "community"
+    }
+  ],
+  "metadata_schema_prefixes": [
+    "ac",
+    "atmire",
+    "creativework",
+    "creativeworkseries",
+    "dc",
+    "dcterms",
+    "dspace",
+    "eperson",
+    "local",
+    "organization",
+    "periodical",
+    "person",
+    "project",
+    "publicationissue",
+    "publicationvolume",
+    "relation",
+    "unsw",
+    "workflow"
+  ]
+}

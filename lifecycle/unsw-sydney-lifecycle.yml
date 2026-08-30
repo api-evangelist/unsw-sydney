@@ -1,0 +1,111 @@
+---
+name: UNSW Sydney — surface lifecycle
+aid: unsw-sydney
+generated: '2026-08-19'
+method: probed
+source:
+  - https://github.com/devsoc-unsw/timetable-scraper
+  - https://github.com/csesoc/handbook-api
+  - https://freerooms.devsoc.app/api/buildings
+  - https://unsworks.unsw.edu.au/server/api
+  - https://resdata.unsw.edu.au/
+  - https://api.unsw.edu.au/
+description: >-
+  Lifecycle state of every surface previously or currently attributed to UNSW. The two
+  community-maintained APIs this repository catalogued in June 2026 have both been archived since;
+  the June profile described them as live. Recording the retirement is the correction.
+surfaces:
+  - surface: UNSWorks Repository REST API (DSpace 7.0)
+    x-operator: institution
+    state: live
+    version: DSpace 7.0
+    version_source: dspaceVersion field in the live service document
+    evidence:
+      url: https://unsworks.unsw.edu.au/server/api
+      status: 200
+    note: >-
+      DSpace 7.0 is several minor versions behind current DSpace 7.x/8.x. The repository publishes
+      no changelog, deprecation policy or version negotiation header.
+  - surface: UNSWorks OAI-PMH
+    x-operator: institution
+    state: live
+    version: OAI-PMH 2.0
+    earliest_record: '2007-11-06T00:00:00Z'
+    evidence:
+      url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
+      status: 200
+  - surface: UNSW Shibboleth Identity Provider (AAF)
+    x-operator: institution
+    state: live
+    evidence:
+      url: https://aaf.unsw.edu.au/idp/shibboleth
+      status: 200
+    note: Signing certificate in the published metadata carries a 2016–2036 validity window.
+  - surface: UNSW Enterprise Developer Portal
+    x-operator: institution
+    state: live-but-gated
+    evidence:
+      url: https://apideveloper.unsw.edu.au/
+      status: 200
+    note: >-
+      No public API catalogue, no changelog, no status page. There is no way from outside to tell
+      whether any individual enterprise API has been added, versioned or retired.
+  - surface: UNSW Timetable API (DevSoc)
+    x-operator: tenant
+    state: archived
+    archived_on: '2026-04-05'
+    evidence:
+      url: https://github.com/devsoc-unsw/timetable-scraper
+      status: 200
+      detail: >-
+        GitHub reports "This repository was archived by the owner on Apr 5, 2026. It is now
+        read-only." Default branch master. The June 2026 profile listed this as a live surface.
+  - surface: UNSW Handbook API (CSESoc)
+    x-operator: tenant
+    state: archived
+    archived_on: '2026-04-03'
+    evidence:
+      url: https://github.com/csesoc/handbook-api
+      status: 200
+      detail: >-
+        GitHub reports "This repository was archived by the owner on Apr 3, 2026. It is now
+        read-only." Default branch master. The June 2026 profile listed this as a live surface.
+  - surface: Freerooms API (DevSoc)
+    x-operator: tenant
+    state: live
+    evidence:
+      - url: https://freerooms.devsoc.app/api/buildings
+        status: 200
+      - url: https://freerooms.devsoc.app/api/rooms
+        status: 200
+    note: >-
+      The live successor to the archived scraper — a student-society-operated campus room and
+      occupancy API built on UNSW timetable data, on a non-institution domain (devsoc.app).
+      Credited as tenant, not institution.
+  - surface: ResData (UNSW research data metadata store)
+    x-operator: institution
+    state: retired
+    retired_on: '2021-12-13'
+    evidence:
+      url: https://resdata.unsw.edu.au/
+      status: 0
+      detail: Host no longer resolves (NXDOMAIN). Superseded by ResToolkit.
+  - surface: ResToolkit (research data management plans and storage provisioning)
+    x-operator: tenant
+    state: live-but-gated
+    evidence:
+      url: https://restoolkit.unsw.edu.au/
+      status: 200
+      detail: >-
+        Redirects to a Microsoft Power Apps application in the UNSW tenant
+        (apps.powerapps.com, tenantId 3ff6cfa4-e715-48db-b8e1-0867b9f9fba3). Institution service,
+        vendor platform, no anonymous surface.
+  - surface: api.unsw.edu.au
+    x-operator: institution
+    state: not-a-public-surface
+    evidence:
+      url: https://api.unsw.edu.au/
+      status: 502
+      detail: >-
+        Shares an IP with apideveloper.unsw.edu.au (20.248.141.24) but returns 502 to
+        unauthenticated requests and is documented nowhere. Not catalogued as a surface.

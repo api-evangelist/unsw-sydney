@@ -1,0 +1,19 @@
+{
+  "keys": [
+    {
+      "kty": "RSA",
+      "alg": "RS256",
+      "kid": "0ef5e164fd271f6191c9",
+      "e": "AQAB",
+      "n": "yCIxYZAkJZ36TVte6IrpTarP...[TRUNCATED]",
+      "use": "sig"
+    }
+  ],
+  "_provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "https://moodle.telt.unsw.edu.au/mod/lti/certs.php",
+    "x-operator": "tenant",
+    "note": "LTI 1.3 platform public keyset served from UNSW's Moodle hostname. The host is under unsw.edu.au but the AAF federation metadata for the matching SP names Learning Technologies Group Pty Ltd (Open LMS) as the operating organisation, so this is a vendor platform on an institution-specific hostname. RSA modulus truncated; key id and algorithm verbatim."
+  }
+}

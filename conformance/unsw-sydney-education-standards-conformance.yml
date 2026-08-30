@@ -1,0 +1,182 @@
+---
+name: UNSW Sydney — education regime domain-standard conformance
+aid: unsw-sydney
+generated: '2026-08-19'
+method: probed
+source:
+  - https://unsworks.unsw.edu.au/oai/request?verb=Identify
+  - https://unsworks.unsw.edu.au/oai/request?verb=ListMetadataFormats
+  - https://aaf.unsw.edu.au/idp/shibboleth
+  - https://md.aaf.edu.au/aaf-metadata.xml
+  - https://moodle.telt.unsw.edu.au/mod/lti/certs.php
+  - https://unsworks.unsw.edu.au/server/api/core/metadatafields/search/byFieldName?query=orcid
+  - https://unsworks.unsw.edu.au/server/api/core/entitytypes?size=30
+description: >-
+  Conformance evidence for the Kin Score `education` regulatory regime standards[] list. This file
+  is reward-only: a standard appears as `confirmed` only where a live machine-readable artifact
+  was fetched and read on 2026-08-19. Standards with no evidence are recorded as `not_evidenced`
+  and must never be read as a claim.
+regime: education
+regime_standards_evaluated:
+  - scim
+  - lti
+  - oneroster
+  - ed-fi
+  - caliper
+  - qti
+  - oai-pmh
+  - shibboleth
+  - saml
+  - orcid
+  - datacite
+  - crossref
+conformance:
+  - standard: oai-pmh
+    version: '2.0'
+    status: confirmed
+    x-operator: institution
+    evidence:
+      url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
+      status: 200
+      location: OAI-PMH/Identify/protocolVersion
+      value: '2.0'
+      detail: >-
+        repositoryName "UNSWorks Repository"; baseURL https://unsworks.unsw.edu.au/oai/request;
+        repositoryIdentifier unsworks.library.unsw.edu.au; earliestDatestamp 2007-11-06T00:00:00Z;
+        granularity YYYY-MM-DDThh:mm:ssZ; deletedRecord transient; adminEmail
+        lib.repository.alerts@unsw.edu.au.
+    supporting_evidence:
+      - url: https://unsworks.unsw.edu.au/oai/request?verb=ListMetadataFormats
+        status: 200
+        location: OAI-PMH/ListMetadataFormats/metadataFormat/metadataPrefix
+        value: uketd_dc, qdc, didl, mods, ore, mets, oai_dc, rdf, marc, xoai, dim, etdms
+      - url: https://unsworks.unsw.edu.au/oai/request?verb=ListSets
+        status: 200
+        location: OAI-PMH/ListSets/set/setSpec
+        value: com_1959.4_*, col_1959.4_* (sets keyed on the UNSW handle prefix)
+      - url: https://unsworks.unsw.edu.au/oai/request?verb=GetRecord&metadataPrefix=oai_dc&identifier=oai:unsworks.library.unsw.edu.au:1959.4/60912
+        status: 200
+        location: OAI-PMH/GetRecord
+        value: a real record retrieved by identifier
+  - standard: saml
+    version: '2.0'
+    status: confirmed
+    x-operator: institution
+    evidence:
+      url: https://aaf.unsw.edu.au/idp/shibboleth
+      status: 200
+      content_type: application/xml
+      location: EntityDescriptor/IDPSSODescriptor/@protocolSupportEnumeration
+      value: 'urn:oasis:names:tc:SAML:2.0:protocol'
+      detail: >-
+        entityID https://aaf.unsw.edu.au/idp/shibboleth. SingleSignOnService bindings
+        urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST at /idp/profile/SAML2/POST/SSO and
+        urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect at /idp/profile/SAML2/Redirect/SSO.
+  - standard: shibboleth
+    status: confirmed
+    x-operator: institution
+    evidence:
+      url: https://aaf.unsw.edu.au/idp/shibboleth
+      status: 200
+      location: EntityDescriptor/IDPSSODescriptor/Extensions/shibmd:Scope
+      value: 'unsw.edu.au'
+      detail: >-
+        A Shibboleth Identity Provider asserting the unsw.edu.au scope, published under the
+        institution's own registrable domain. Registered in the Australian Access Federation
+        aggregate with OrganizationName "The University of New South Wales" and mdui:DisplayName
+        "The University of New South Wales (UNSW)". AAF is an eduGAIN participant, so this entity
+        is interfederated.
+    supporting_evidence:
+      - url: https://md.aaf.edu.au/aaf-metadata.xml
+        status: 200
+        location: 'EntityDescriptor[@entityID="https://aaf.unsw.edu.au/idp/shibboleth"]'
+        value: IDPSSODescriptor present; Organization = The University of New South Wales
+      - url: https://md.aaf.edu.au/aaf-metadata.xml
+        status: 200
+        location: 'EntityDescriptor[@entityID="https://sp.acls.analytical.unsw.edu.au/shibboleth"]'
+        value: >-
+          A second UNSW-operated entity — the "AC Lab System" service provider, OrganizationName
+          unsw.edu.au, OrganizationURL https://www.unsw.edu.au.
+  - standard: lti
+    version: '1.3'
+    status: confirmed
+    x-operator: tenant
+    evidence:
+      url: https://moodle.telt.unsw.edu.au/mod/lti/certs.php
+      status: 200
+      content_type: application/json
+      location: keys[0].alg
+      value: RS256
+      detail: >-
+        A live LTI 1.3 / IMS Global Learning Tools Interoperability platform public keyset (JWKS)
+        served from UNSW's Moodle hostname, alongside a live /mod/lti/auth.php authorisation
+        endpoint (200) and /mod/lti/token.php token endpoint (400 without a grant, i.e. present
+        and rejecting an empty request rather than absent).
+    operator_note: >-
+      Recorded as tenant, not institution. The hostname is under unsw.edu.au, but the matching
+      service-provider entity in the AAF federation metadata
+      (https://moodle.telt.unsw.edu.au/simplesaml/module.php/saml/sp/metadata.php/default-sp)
+      declares OrganizationName ltgplc.com / "Learning Technologies Group Pty Ltd" — the Open LMS
+      vendor. The LMS is a vendor platform on an institution-specific hostname. UNSW gets credit
+      for operating an LTI-conformant learning platform; the contract is Moodle's, not UNSW's.
+  - standard: orcid
+    status: not_evidenced
+    x-operator: institution
+    evidence:
+      url: https://unsworks.unsw.edu.au/server/api/core/metadatafields/search/byFieldName?query=orcid
+      status: 200
+      location: _embedded.metadatafields
+      value: 'person.identifier.orcid, ac.person.orcid'
+      detail: >-
+        The ORCID fields are REGISTERED in the UNSWorks metadata registry but are not evidenced as
+        populated. The repository configures no Person entity type
+        (/server/api/core/entitytypes returns Publication, OrgUnit, Dataset, Journal, JournalVolume,
+        JournalIssue only), and no public query returned a populated ORCID value. A registered
+        field is a schema default, not a conformance. Recorded as not_evidenced deliberately —
+        it must not be scored as a hit.
+  - standard: datacite
+    status: not_evidenced
+    detail: >-
+      UNSWorks mints CNRI handles under the UNSW prefix 1959.4, not DataCite DOIs. The DOI fields
+      present in the registry (unsw.identifier.doi, unsw.identifier.doiPublisher,
+      unsw.relation.doiPublisher) carry publisher DOIs recorded against a deposited output, which
+      is citation metadata, not DOI minting by the institution. No DataCite member prefix or
+      DataCite API surface was found.
+  - standard: crossref
+    status: not_evidenced
+    detail: No Crossref deposit or query surface operated by the institution was found.
+  - standard: scim
+    status: not_evidenced
+    detail: >-
+      No public SCIM endpoint. The enterprise identity plane is behind the gated Azure API
+      Management portal at apideveloper.unsw.edu.au; if SCIM is in use it is not publicly readable.
+  - standard: oneroster
+    status: not_evidenced
+    detail: No 1EdTech OneRoster surface found on any UNSW-operated host.
+  - standard: ed-fi
+    status: not_evidenced
+    detail: Ed-Fi is a US K-12 data standard; not applicable to an Australian university and none found.
+  - standard: caliper
+    status: not_evidenced
+    detail: >-
+      No public Caliper Analytics event store or sensor endpoint. Learning analytics, if collected,
+      runs inside the vendor LMS and is not publicly readable.
+  - standard: qti
+    status: not_evidenced
+    detail: No public QTI assessment item bank or exchange endpoint found.
+summary:
+  confirmed:
+    - oai-pmh
+    - saml
+    - shibboleth
+  confirmed_tenant:
+    - lti
+  not_evidenced:
+    - scim
+    - oneroster
+    - ed-fi
+    - caliper
+    - qti
+    - orcid
+    - datacite
+    - crossref

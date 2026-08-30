@@ -1,0 +1,80 @@
+---
+name: UNSWorks Repository metadata vocabulary
+aid: unsw-sydney
+generated: '2026-08-19'
+method: probed
+source:
+  - https://unsworks.unsw.edu.au/server/api/core/metadataschemas?size=50
+  - https://unsworks.unsw.edu.au/server/api/core/entitytypes?size=30
+  - https://unsworks.unsw.edu.au/server/api/core/metadatafields/search/byFieldName?query=orcid
+  - https://unsworks.unsw.edu.au/server/api/core/metadatafields/search/byFieldName?query=doi
+  - https://unsworks.unsw.edu.au/oai/request?verb=ListMetadataFormats
+x-operator: institution
+description: >-
+  The metadata vocabulary actually registered in the institution-operated UNSWorks repository,
+  read from its live registry rather than from DSpace defaults. The `unsw` and `local` schema
+  prefixes are the institution's own extensions and are the part of this vocabulary that belongs
+  to UNSW rather than to the software.
+schemas:
+  standard:
+    - prefix: dc
+      note: Dublin Core elements.
+    - prefix: dcterms
+      note: DCMI Metadata Terms.
+    - prefix: person
+      note: DSpace person entity schema — registered, but no Person entity type is configured.
+    - prefix: relation
+    - prefix: project
+    - prefix: organization
+    - prefix: periodical
+    - prefix: creativework
+    - prefix: creativeworkseries
+    - prefix: publicationissue
+    - prefix: publicationvolume
+  platform:
+    - prefix: dspace
+    - prefix: eperson
+    - prefix: workflow
+    - prefix: atmire
+      note: Atmire is the DSpace integrator whose modules are installed on this instance.
+    - prefix: ac
+      note: Atmire content/authority module schema.
+  institution_extensions:
+    - prefix: unsw
+      note: >-
+        UNSW's own extension schema. Confirmed fields include unsw.identifier.doi,
+        unsw.identifier.doiPublisher and unsw.relation.doiPublisher — publisher DOIs recorded
+        against a deposited output.
+    - prefix: local
+      note: Local repository extension schema.
+entity_types:
+  - Publication
+  - OrgUnit
+  - Dataset
+  - Journal
+  - JournalVolume
+  - JournalIssue
+entity_types_absent:
+  - Person
+  - Project
+  - Funding
+oai_metadata_formats:
+  - oai_dc
+  - qdc
+  - uketd_dc
+  - didl
+  - mods
+  - ore
+  - mets
+  - rdf
+  - marc
+  - xoai
+  - dim
+  - etdms
+identifier_scheme:
+  type: CNRI Handle
+  prefix: '1959.4'
+  example: '1959.4/60912'
+  note: >-
+    UNSWorks identifies objects with handles under the UNSW-registered prefix 1959.4, not with
+    DataCite DOIs. Set specs in OAI-PMH are keyed on the same prefix (com_1959.4_*, col_1959.4_*).

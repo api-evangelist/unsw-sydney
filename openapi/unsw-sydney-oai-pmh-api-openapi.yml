@@ -1,0 +1,210 @@
+openapi: 3.2.0
+info:
+  title: UNSWorks Repository Interface Oai Pmh API
+  version: '2.0'
+  summary: Institution-operated OAI-PMH 2.0 metadata harvesting endpoint for UNSWorks.
+  description: 'OAI-PMH 2.0 harvesting interface for the UNSW open-access institutional repository, served
+
+    from UNSW''s own host. The Identify response names the repository "UNSWorks Repository",
+
+    declares repositoryIdentifier unsworks.library.unsw.edu.au, an earliestDatestamp of
+
+    2007-11-06 and an admin contact of lib.repository.alerts@unsw.edu.au.
+
+
+    OPERATOR: institution. OAI-PMH is one of the few machine-readable surfaces a university
+
+    genuinely operates itself even when the repository software came from somewhere else — the
+
+    protocol, the base URL, the sets and the records are all under UNSW''s control.
+
+
+    This is also the institution''s strongest `education`-regime domain-standard conformance:
+
+    OAI-PMH 2.0, live, on their own host, exposing twelve metadata formats.
+
+
+    PROVENANCE: UNSW publishes no OpenAPI for this surface. Every verb, parameter and error code
+
+    below was exercised live on 2026-08-19; none is copied from the OAI-PMH specification without
+
+    being confirmed against this endpoint.
+
+    '
+  contact:
+    name: UNSW Library — UNSWorks Repository
+    email: lib.repository.alerts@unsw.edu.au
+    url: https://unsworks.unsw.edu.au/
+  x-operator: institution
+  x-operator-evidence: baseURL declared inside the endpoint's own Identify response is https://unsworks.unsw.edu.au/oai/request, under the institution's registrable domain, with a unsw.edu.au adminEmail and the UNSW handle prefix 1959.4 in its sample identifier.
+  x-provenance:
+    generated: '2026-08-19'
+    method: probed
+    source:
+    - https://unsworks.unsw.edu.au/oai/request?verb=Identify
+    - https://unsworks.unsw.edu.au/oai/request?verb=ListMetadataFormats
+    - https://unsworks.unsw.edu.au/oai/request?verb=ListSets
+    - https://unsworks.unsw.edu.au/oai/request?verb=ListIdentifiers&metadataPrefix=oai_dc
+    - https://unsworks.unsw.edu.au/oai/request?verb=ListRecords&metadataPrefix=oai_dc
+    - https://unsworks.unsw.edu.au/oai/request?verb=GetRecord&metadataPrefix=oai_dc&identifier=oai:unsworks.library.unsw.edu.au:1959.4/60912
+    - https://unsworks.unsw.edu.au/oai/request?verb=Bogus
+    - https://unsworks.unsw.edu.au/oai/request?verb=GetRecord
+servers:
+- url: https://unsworks.unsw.edu.au/oai
+  description: UNSWorks OAI-PMH base (institution-operated).
+tags:
+- name: oai-pmh
+  description: OAI-PMH 2.0 verbs, all exercised live against this endpoint.
+paths:
+  /request:
+    get:
+      tags:
+      - oai-pmh
+      operationId: oaiRequest
+      summary: OAI-PMH 2.0 request
+      description: "Single verb-dispatched endpoint. All six OAI-PMH verbs were confirmed to return HTTP 200\nwith a well-formed OAI-PMH envelope on 2026-08-19:\n\n- `Identify` — repositoryName \"UNSWorks Repository\", protocolVersion 2.0,\n  granularity YYYY-MM-DDThh:mm:ssZ, deletedRecord transient.\n- `ListMetadataFormats` — twelve prefixes: uketd_dc, qdc, didl, mods, ore, mets, oai_dc,\n  rdf, marc, xoai, dim, etdms.\n- `ListSets` — community and collection sets under the UNSW handle prefix\n  (com_1959.4_*, col_1959.4_*).\n- `ListIdentifiers`, `ListRecords`, `GetRecord` — confirmed with metadataPrefix=oai_dc;\n  a real identifier returned by this endpoint is\n  oai:unsworks.library.unsw.edu.au:1959.4/60912.\n\nErrors are returned in-band as an `<error code=\"...\">` element with HTTP 200, per the\nOAI-PMH specification; the two confirmed codes are documented under responses.\n"
+      parameters:
+      - name: verb
+        in: query
+        required: true
+        description: OAI-PMH verb.
+        schema:
+          type: string
+          enum:
+          - Identify
+          - ListMetadataFormats
+          - ListSets
+          - ListIdentifiers
+          - ListRecords
+          - GetRecord
+      - name: metadataPrefix
+        in: query
+        required: false
+        description: 'Required for ListIdentifiers, ListRecords and GetRecord. Confirmed supported values on this endpoint: uketd_dc, qdc, didl, mods, ore, mets, oai_dc, rdf, marc, xoai, dim, etdms.'
+        schema:
+          type: string
+          enum:
+          - uketd_dc
+          - qdc
+          - didl
+          - mods
+          - ore
+          - mets
+          - oai_dc
+          - rdf
+          - marc
+          - xoai
+          - dim
+          - etdms
+      - name: identifier
+        in: query
+        required: false
+        description: OAI identifier, required for GetRecord.
+        schema:
+          type: string
+        example: oai:unsworks.library.unsw.edu.au:1959.4/60912
+      - name: set
+        in: query
+        required: false
+        description: Set spec, e.g. com_1959.4_3 or col_1959.4_14.
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: false
+        description: Lower datestamp bound. Earliest datestamp in this repository is 2007-11-06T00:00:00Z.
+        schema:
+          type: string
+      - name: until
+        in: query
+        required: false
+        description: Upper datestamp bound.
+        schema:
+          type: string
+      - name: resumptionToken
+        in: query
+        required: false
+        description: Flow-control token for continuing a list request.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OAI-PMH envelope. Per the protocol this status is also used for protocol-level errors, which appear as an <error code="..."> element. Confirmed codes on this endpoint: badVerb ("Illegal verb") and badArgument ("GetRecord verb requires the use of the parameters - identifier and metadataPrefix").'
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OaiPmhEnvelope'
+components:
+  schemas:
+    Identify:
+      type: object
+      description: Captured live from this endpoint on 2026-08-19.
+      properties:
+        repositoryName:
+          type: string
+          examples:
+          - UNSWorks Repository
+        baseURL:
+          type: string
+          format: uri
+          examples:
+          - https://unsworks.unsw.edu.au/oai/request
+        protocolVersion:
+          type: string
+          const: '2.0'
+        adminEmail:
+          type: string
+          format: email
+          examples:
+          - lib.repository.alerts@unsw.edu.au
+        earliestDatestamp:
+          type: string
+          format: date-time
+          examples:
+          - '2007-11-06T00:00:00Z'
+        deletedRecord:
+          type: string
+          examples:
+          - transient
+        granularity:
+          type: string
+          examples:
+          - YYYY-MM-DDThh:mm:ssZ
+        repositoryIdentifier:
+          type: string
+          examples:
+          - unsworks.library.unsw.edu.au
+      required:
+      - repositoryName
+      - baseURL
+      - protocolVersion
+      - adminEmail
+      - earliestDatestamp
+    OaiPmhEnvelope:
+      type: object
+      description: XML document rooted at OAI-PMH in namespace http://www.openarchives.org/OAI/2.0/. Modelled structurally here because OpenAPI has no native XSD reference; the authoritative schema is http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd, which this endpoint declares in its own xsi:schemaLocation.
+      properties:
+        responseDate:
+          type: string
+          format: date-time
+        request:
+          type: string
+          format: uri
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - badVerb
+              - badArgument
+              - badResumptionToken
+              - cannotDisseminateFormat
+              - idDoesNotExist
+              - noRecordsMatch
+              - noMetadataFormats
+              - noSetHierarchy
+            message:
+              type: string
+        Identify:
+          $ref: '#/components/schemas/Identify'

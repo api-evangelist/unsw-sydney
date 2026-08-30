@@ -1,0 +1,315 @@
+openapi: 3.2.0
+info:
+  title: UNSWorks Repository REST Core API
+  version: '7.0'
+  summary: Institution-operated DSpace 7.0 REST/HAL API for the UNSW open-access institutional repository.
+  description: 'UNSWorks is the University of New South Wales open-access institutional repository. It runs
+
+    DSpace 7.0 on UNSW''s own infrastructure, under UNSW''s own registrable domain
+
+    (unsworks.unsw.edu.au, A record 54.253.215.118 — no vendor CNAME), and is administered by the
+
+    UNSW Library (adminEmail lib.repository.alerts@unsw.edu.au, published in the repository''s own
+
+    OAI-PMH Identify response).
+
+
+    OPERATOR: institution. The DSpace software is open source (LYRASIS); the deployment, the
+
+    hostname, the handle prefix 1959.4 and the content are UNSW''s. This is not a vendor tenancy —
+
+    contrast a `<institution>.figshare.com` style host, which would be `tenant`.
+
+
+    PROVENANCE: UNSW publishes no OpenAPI for this surface. Every path and response below was
+
+    derived from live, unauthenticated probes performed on 2026-08-19; nothing is inferred from
+
+    generic DSpace documentation. Paths that returned 401 unauthenticated are documented as such
+
+    rather than omitted, because the gate is itself the finding.
+
+    '
+  contact:
+    name: UNSW Library — UNSWorks Repository
+    email: lib.repository.alerts@unsw.edu.au
+    url: https://unsworks.unsw.edu.au/
+  x-operator: institution
+  x-operator-evidence: Host unsworks.unsw.edu.au is under the institution's own registrable domain unsw.edu.au and resolves to a UNSW-controlled A record, not a vendor CNAME. The OAI-PMH Identify response on the same host names the repository "UNSWorks Repository" with a unsw.edu.au admin contact.
+  x-provenance:
+    generated: '2026-08-19'
+    method: probed
+    source:
+    - https://unsworks.unsw.edu.au/server/api
+    - https://unsworks.unsw.edu.au/server/api/core/communities?size=2
+    - https://unsworks.unsw.edu.au/server/api/core/collections?size=1
+    - https://unsworks.unsw.edu.au/server/api/core/sites
+    - https://unsworks.unsw.edu.au/server/api/core/metadataschemas?size=50
+    - https://unsworks.unsw.edu.au/server/api/core/metadatafields/search/byFieldName?query=orcid
+    - https://unsworks.unsw.edu.au/server/api/core/entitytypes?size=30
+    - https://unsworks.unsw.edu.au/server/api/discover/search/objects?size=1
+    - https://unsworks.unsw.edu.au/server/api/core/items/00000000-0000-0000-0000-000000000000
+servers:
+- url: https://unsworks.unsw.edu.au/server/api
+  description: UNSWorks production DSpace 7.0 REST/HAL server (institution-operated).
+tags:
+- name: core
+  description: Communities, collections, sites and the metadata registry.
+paths:
+  /core/communities:
+    get:
+      tags:
+      - core
+      operationId: listCommunities
+      summary: List top-level and child communities
+      description: Verified 200 unauthenticated on 2026-08-19.
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Paged HAL collection of communities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommunityPage'
+  /core/collections:
+    get:
+      tags:
+      - core
+      operationId: listCollections
+      summary: List collections
+      description: Verified 200 unauthenticated on 2026-08-19.
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Paged HAL collection of collections.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HalPage'
+  /core/sites:
+    get:
+      tags:
+      - core
+      operationId: listSites
+      summary: Repository site object
+      description: Verified 200 unauthenticated on 2026-08-19.
+      responses:
+        '200':
+          description: Paged HAL collection containing the single site object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HalPage'
+  /core/metadataschemas:
+    get:
+      tags:
+      - core
+      operationId: listMetadataSchemas
+      summary: Metadata schema registry
+      description: Returns the metadata schema prefixes registered in this repository. UNSWorks returns dc, eperson, dspace, dcterms, local, unsw, relation, person, project, organization, periodical, creativework, creativeworkseries, publicationissue, publicationvolume, ac, atmire and workflow. Verified 200 unauthenticated on 2026-08-19.
+      parameters:
+      - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Paged HAL collection of metadata schemas.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HalPage'
+  /core/metadatafields/search/byFieldName:
+    get:
+      tags:
+      - core
+      operationId: searchMetadataFields
+      summary: Search the metadata field registry by field name
+      description: Verified 200 unauthenticated on 2026-08-19.
+      parameters:
+      - name: query
+        in: query
+        required: true
+        description: Substring matched against schema, element and qualifier.
+        schema:
+          type: string
+        example: orcid
+      - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Paged HAL collection of matching metadata fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HalPage'
+  /core/entitytypes:
+    get:
+      tags:
+      - core
+      operationId: listEntityTypes
+      summary: Configured entity types
+      description: UNSWorks returns Publication, OrgUnit, Dataset, Journal, JournalVolume and JournalIssue. Note the absence of a Person entity type, which is why the registered person.identifier.orcid field is not evidenced as populated. Verified 200 unauthenticated on 2026-08-19.
+      parameters:
+      - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Paged HAL collection of entity types.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HalPage'
+  /core/items/{uuid}:
+    get:
+      tags:
+      - core
+      operationId: getItem
+      summary: Fetch a single item by UUID
+      description: Item retrieval by UUID. Probed on 2026-08-19 with a non-existent UUID, which returned the documented 404 error envelope. NOTE the browse form of this resource (GET /core/items without a UUID) returns 401 unauthenticated.
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The item.
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: No item with that UUID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Returned for the unbounded browse form of this resource on UNSWorks (GET /core/items?size=1 returned 401 unauthenticated on 2026-08-19).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    HalPage:
+      type: object
+      description: Generic DSpace HAL paged envelope.
+      properties:
+        _embedded:
+          type: object
+        page:
+          type: object
+          properties:
+            size:
+              type: integer
+            totalElements:
+              type: integer
+            totalPages:
+              type: integer
+            number:
+              type: integer
+        _links:
+          type: object
+    CommunityPage:
+      allOf:
+      - $ref: '#/components/schemas/HalPage'
+      - type: object
+        properties:
+          _embedded:
+            type: object
+            properties:
+              communities:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Community'
+    MetadataMap:
+      type: object
+      description: DSpace metadata map keyed by qualified field name.
+      additionalProperties:
+        type: array
+        items:
+          type: object
+          properties:
+            value:
+              type: string
+            language:
+              type:
+              - string
+              - 'null'
+            authority:
+              type:
+              - string
+              - 'null'
+            confidence:
+              type: integer
+            place:
+              type: integer
+          required:
+          - value
+    Error:
+      type: object
+      description: Spring Boot error envelope as returned live by UNSWorks.
+      properties:
+        timestamp:
+          type: string
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
+      required:
+      - timestamp
+      - status
+      - error
+      - path
+    Community:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        handle:
+          type: string
+          description: CNRI handle under the UNSW prefix 1959.4.
+          examples:
+          - 1959.4/3
+        type:
+          type: string
+          const: community
+        metadata:
+          $ref: '#/components/schemas/MetadataMap'
+      required:
+      - uuid
+      - name
+      - handle
+      - type
+  parameters:
+    Size:
+      name: size
+      in: query
+      required: false
+      description: Page size.
+      schema:
+        type: integer
+        minimum: 1
+        default: 20
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Zero-based page index.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0

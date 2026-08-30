@@ -1,0 +1,65 @@
+---
+name: UNSW Sydney — error semantics
+aid: unsw-sydney
+generated: '2026-08-19'
+method: probed
+source:
+  - https://unsworks.unsw.edu.au/server/api/core/items/00000000-0000-0000-0000-000000000000
+  - https://unsworks.unsw.edu.au/server/api/core/items?size=1
+  - https://unsworks.unsw.edu.au/oai/request?verb=Bogus
+  - https://unsworks.unsw.edu.au/oai/request?verb=GetRecord
+description: >-
+  Error envelopes captured by deliberately provoking failures against the institution-operated
+  surfaces. UNSW documents no error contract of its own; these shapes come from the software it
+  runs, but they are what a consumer will actually receive.
+surfaces:
+  - surface: UNSWorks Repository REST API (DSpace 7.0)
+    x-operator: institution
+    envelope: Spring Boot error object
+    media_type: application/json
+    shape:
+      timestamp: ISO-8601 date-time
+      status: integer HTTP status
+      error: HTTP reason phrase
+      message: string
+      path: request path
+    observed:
+      - http_status: 404
+        url: https://unsworks.unsw.edu.au/server/api/core/items/00000000-0000-0000-0000-000000000000
+        body: >-
+          {"timestamp":"2026-08-19T21:50:39.802+00:00","status":404,"error":"Not Found",
+          "message":"An exception has occurred","path":"/server/api/core/items/00000000-0000-0000-0000-000000000000"}
+        note: >-
+          The message is generic ("An exception has occurred") and carries no machine-actionable
+          error code — a real ergonomics weakness for an integrator.
+      - http_status: 401
+        url: https://unsworks.unsw.edu.au/server/api/core/items?size=1
+        note: Unbounded item browse is authenticated; discovery search is not.
+      - http_status: 401
+        url: https://unsworks.unsw.edu.au/server/api/core/bitstreams?size=1
+  - surface: UNSWorks OAI-PMH
+    x-operator: institution
+    envelope: in-band OAI-PMH <error code="..."> element returned with HTTP 200
+    media_type: application/xml
+    note: >-
+      Per OAI-PMH 2.0, protocol errors are NOT signalled by HTTP status. A consumer that only
+      checks status codes will treat every malformed request as a success. Both codes below were
+      returned with HTTP 200.
+    observed:
+      - http_status: 200
+        oai_error_code: badVerb
+        url: https://unsworks.unsw.edu.au/oai/request?verb=Bogus
+        message: Illegal verb
+      - http_status: 200
+        oai_error_code: badArgument
+        url: https://unsworks.unsw.edu.au/oai/request?verb=GetRecord
+        message: GetRecord verb requires the use of the parameters - identifier and metadataPrefix
+    specification_codes:
+      - badVerb
+      - badArgument
+      - badResumptionToken
+      - cannotDisseminateFormat
+      - idDoesNotExist
+      - noRecordsMatch
+      - noMetadataFormats
+      - noSetHierarchy

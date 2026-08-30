@@ -1,0 +1,66 @@
+---
+x-name: UNSW Sydney — governance rules
+x-aid: unsw-sydney
+x-generated: '2026-08-19'
+x-method: generated
+x-source:
+  - openapi/unsw-sydney-unsworks-dspace-openapi.yml
+  - openapi/unsw-sydney-unsworks-oai-pmh-openapi.yml
+  - conformance/unsw-sydney-education-standards-conformance.yml
+x-operator: institution
+description: >-
+  Governance rules an API Evangelist reviewer would apply to the institution-operated UNSW
+  surfaces. These are API Evangelist's rules about UNSW's artifacts, not rules UNSW publishes —
+  UNSW publishes no API governance ruleset, style guide or design standard on any public surface.
+rules:
+  - id: unsw-operator-attribution
+    severity: error
+    applies_to: every apis[] entry in apis.yml
+    rule: >-
+      Every surface carries x-operator. A surface on a vendor platform under an institution-specific
+      hostname is `tenant`, never `institution`, regardless of the hostname's domain.
+  - id: unsw-no-vendor-contract-under-institution
+    severity: error
+    applies_to: openapi/
+    rule: >-
+      No OpenAPI may be saved under this slug whose info.title, info.contact or servers[] names a
+      third-party platform (Figshare, Elsevier Pure, Ex Libris, Symplectic, Dataverse, Open LMS).
+      Record the tenant relationship in apis.yml instead.
+    status: passing
+    detail: >-
+      Both saved OpenAPIs describe unsworks.unsw.edu.au, a host on UNSW's own registrable domain
+      with a unsw.edu.au administrative contact.
+  - id: unsw-probed-not-inferred
+    severity: error
+    applies_to: openapi/, json-schema/, examples/
+    rule: >-
+      No path, parameter, response or field may appear in a derived artifact unless it was observed
+      in a live response. Software documentation is not evidence of a deployment.
+    status: passing
+  - id: unsw-oai-error-in-band
+    severity: warn
+    applies_to: consumers of the OAI-PMH surface
+    rule: >-
+      OAI-PMH signals protocol errors inside a 200 response. A consumer that branches on HTTP status
+      alone will silently accept malformed requests. Parse the <error code> element.
+  - id: unsw-dspace-item-browse-gated
+    severity: warn
+    applies_to: consumers of the DSpace REST surface
+    rule: >-
+      /core/items and /core/bitstreams return 401 unauthenticated on this deployment. Use
+      /discover/search/objects or OAI-PMH for anonymous harvesting.
+  - id: unsw-gateway-catalogue-unreadable
+    severity: info
+    applies_to: apideveloper.unsw.edu.au
+    rule: >-
+      The Enterprise API Gateway catalogue is not publicly enumerable, so no claim may be made
+      about the number, shape, versioning or lifecycle of the APIs behind it. Absence of evidence
+      is recorded as gated coverage, never as an absence of APIs.
+  - id: unsw-conformance-reward-only
+    severity: error
+    applies_to: conformance/
+    rule: >-
+      A domain standard is `confirmed` only with a fetched machine-readable artifact and an exact
+      location within it. A registered-but-unpopulated metadata field (person.identifier.orcid) is
+      not_evidenced.
+    status: passing

@@ -1,0 +1,30 @@
+---
+name: UNSW Sydney — OAuth scopes
+aid: unsw-sydney
+generated: '2026-08-19'
+method: probed
+source:
+  - https://apideveloper.unsw.edu.au/getting-started
+  - https://unsworks.unsw.edu.au/server/api
+  - https://moodle.telt.unsw.edu.au/mod/lti/certs.php
+description: >-
+  UNSW publishes no OAuth scope vocabulary on any surface reachable without credentials. This file
+  records that absence explicitly so it is not mistaken for an unexamined gap.
+scopes: []
+absence:
+  state: none
+  reason: no_public_scope_vocabulary
+  detail: >-
+    The Enterprise API Gateway uses Azure API Management subscription keys issued after a manual
+    authorisation process, and its API catalogue is not visible before sign-in, so no scope names
+    are publicly readable. The UNSWorks DSpace REST API and OAI-PMH endpoint are anonymous-read
+    and define no scopes. The only OAuth 2.0 surface found is the LTI 1.3 token endpoint on the
+    tenant-operated Moodle host, whose scopes are defined by the 1EdTech LTI Advantage
+    specification and by Moodle, not by UNSW.
+  evidence:
+    - url: https://apideveloper.unsw.edu.au/apis
+      status: 404
+    - url: https://apideveloper.unsw.edu.au/getting-started
+      status: 200
+    - url: https://unsworks.unsw.edu.au/server/api
+      status: 200
