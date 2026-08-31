@@ -259,6 +259,8 @@ apis:
   humanURL: https://unsworks.unsw.edu.au/
   baseURL: https://unsworks.unsw.edu.au/server/api
   tags:
+  - Core
+  tags_raw:
   - core
   properties:
   - type: OpenAPI
@@ -287,6 +289,8 @@ apis:
   humanURL: https://unsworks.unsw.edu.au/
   baseURL: https://unsworks.unsw.edu.au/server/api
   tags:
+  - Discover
+  tags_raw:
   - discover
   properties:
   - type: OpenAPI
@@ -315,6 +319,8 @@ apis:
   humanURL: https://unsworks.unsw.edu.au/
   baseURL: https://unsworks.unsw.edu.au/server/api
   tags:
+  - OAI-PMH
+  tags_raw:
   - oai-pmh
   properties:
   - type: OpenAPI
@@ -343,6 +349,8 @@ apis:
   humanURL: https://unsworks.unsw.edu.au/
   baseURL: https://unsworks.unsw.edu.au/server/api
   tags:
+  - Root
+  tags_raw:
   - root
   properties:
   - type: OpenAPI
