@@ -84,6 +84,12 @@ apis:
   - Identity Federation
   - Shibboleth
   - SAML
+  - SSO
+  - eduGAIN
+  tags_raw:
+  - Identity Federation
+  - Shibboleth
+  - SAML
   - Single Sign-On
   - eduGAIN
   properties:
@@ -143,6 +149,12 @@ apis:
   - Learning Management
   - LTI
   - Moodle
+  - Tenants
+  - Teaching
+  tags_raw:
+  - Learning Management
+  - LTI
+  - Moodle
   - Tenant
   - Teaching
   properties:
@@ -165,6 +177,12 @@ apis:
   humanURL: https://www.library.unsw.edu.au/
   baseURL: https://unsw.primo.exlibrisgroup.com/discovery/search?vid=61UNSW_INST:UNSWS
   tags:
+  - Library
+  - Discovery
+  - Ex Libris
+  - Primo
+  - Tenants
+  tags_raw:
   - Library
   - Discovery
   - Ex Libris
