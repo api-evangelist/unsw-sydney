@@ -1,56 +1,121 @@
----
 name: University of New South Wales
 description: University of New South Wales public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/unsw-sydney/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 reviews:
-  - date: '2026-06-03'
-    rating: 3
-    summary: >-
-      UNSW operates an official Enterprise Developer Portal on Azure API
-      Management (apideveloper.unsw.edu.au), but it is gated — onboarding is
-      request-based and no public API endpoints or base URLs are disclosed, so
-      enterprise APIs could not be exercised. Publicly verified live surfaces are
-      the UNSWorks DSpace 7.0 repository REST API (/server/api returns JSON) and
-      its OAI-PMH endpoint (Identify verb confirmed). Course/timetable/handbook
-      programmatic access exists only via community-maintained (DevSoc, CSESoc)
-      GitHub projects, not official UNSW APIs. No endpoints were fabricated; only
-      URLs returning verified responses are cataloged.
-    endpoints:
-      - url: https://apideveloper.unsw.edu.au/
-        status: 200
-        note: Official Azure API Management developer portal; gated access.
-      - url: https://apideveloper.unsw.edu.au/getting-started
-        status: 200
-        note: Getting started / onboarding documentation.
-      - url: https://apideveloper.unsw.edu.au/signin
-        status: 200
-        note: Sign-in page; no self-service public registration.
-      - url: https://unsworks.unsw.edu.au/server/api
-        status: 200
-        note: DSpace 7.0 REST/HAL API root; returns JSON.
-      - url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
-        status: 200
-        note: Live OAI-PMH 2.0 endpoint; repository name "UNSWorks Repository".
-      - url: https://github.com/devsoc-unsw/timetable-scraper
-        status: 200
-        note: Community timetable scraper/API (DevSoc); unofficial.
-      - url: https://github.com/csesoc/handbook-api
-        status: 200
-        note: Community handbook API (CSESoc); unofficial.
-      - url: https://www.unsw.edu.au/
-        status: 200
-        note: Official institution website.
-      - url: https://www.handbook.unsw.edu.au/
-        status: 200
-        note: Official UNSW Handbook (HTML; no documented public API).
-      - url: https://timetable.unsw.edu.au/
-        status: 200
-        note: Official timetable site (HTML source for community scraper).
-      - url: https://www.linkedin.com/school/unsw/
-        status: 999
-        note: LinkedIn school page exists; 999 is LinkedIn bot-block, not a dead link.
-      - url: https://github.com/unsw
-        status: 200
-        note: Dormant org with a single 2014 test repo; not an active official org.
+- date: '2026-06-03'
+  rating: 3
+  summary: UNSW operates an official Enterprise Developer Portal on Azure API Management (apideveloper.unsw.edu.au),
+    but it is gated — onboarding is request-based and no public API endpoints or base URLs are disclosed,
+    so enterprise APIs could not be exercised. Publicly verified live surfaces are the UNSWorks DSpace
+    7.0 repository REST API (/server/api returns JSON) and its OAI-PMH endpoint (Identify verb confirmed).
+    Course/timetable/handbook programmatic access exists only via community-maintained (DevSoc, CSESoc)
+    GitHub projects, not official UNSW APIs. No endpoints were fabricated; only URLs returning verified
+    responses are cataloged.
+  endpoints:
+  - url: https://apideveloper.unsw.edu.au/
+    status: 200
+    note: Official Azure API Management developer portal; gated access.
+  - url: https://apideveloper.unsw.edu.au/getting-started
+    status: 200
+    note: Getting started / onboarding documentation.
+  - url: https://apideveloper.unsw.edu.au/signin
+    status: 200
+    note: Sign-in page; no self-service public registration.
+  - url: https://unsworks.unsw.edu.au/server/api
+    status: 200
+    note: DSpace 7.0 REST/HAL API root; returns JSON.
+  - url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
+    status: 200
+    note: Live OAI-PMH 2.0 endpoint; repository name "UNSWorks Repository".
+  - url: https://github.com/devsoc-unsw/timetable-scraper
+    status: 200
+    note: Community timetable scraper/API (DevSoc); unofficial.
+  - url: https://github.com/csesoc/handbook-api
+    status: 200
+    note: Community handbook API (CSESoc); unofficial.
+  - url: https://www.unsw.edu.au/
+    status: 200
+    note: Official institution website.
+  - url: https://www.handbook.unsw.edu.au/
+    status: 200
+    note: Official UNSW Handbook (HTML; no documented public API).
+  - url: https://timetable.unsw.edu.au/
+    status: 200
+    note: Official timetable site (HTML source for community scraper).
+  - url: https://www.linkedin.com/school/unsw/
+    status: 999
+    note: LinkedIn school page exists; 999 is LinkedIn bot-block, not a dead link.
+  - url: https://github.com/unsw
+    status: 200
+    note: Dormant org with a single 2014 test repo; not an active official org.
+- date: '2026-08-19'
+  rating: 3
+  pipeline: university
+  summary: 'University-pipeline re-profile. Operator attribution settled for every surface before anything
+    was saved: four institution-operated (UNSWorks DSpace REST, UNSWorks OAI-PMH, the UNSW Shibboleth
+    IdP, the gated Enterprise Developer Portal) and five tenant (Moodle/Open LMS LTI 1.3, Ex Libris Primo
+    discovery, DevSoc Freerooms, plus the two archived student-society APIs). No vendor contract was saved
+    under this slug. Two genuinely new surface classes were found that the June 2026 profile missed entirely:
+    identity federation (aaf.unsw.edu.au/idp/shibboleth, SAML 2.0 metadata registered in the Australian
+    Access Federation) and a conformant LTI 1.3 platform. Two corrections: the DevSoc timetable-scraper
+    and CSESoc handbook-api were both archived by their owners in April 2026 and are no longer live surfaces;
+    the GitHub organization pointer was moved off the student society to UNSW''s own unsw-edu-au org.
+    Confirmed education-regime domain standards: oai-pmh, saml, shibboleth (institution) and lti (tenant).
+    ORCID is registered in the UNSWorks metadata registry but not evidenced as populated and is recorded
+    as not_evidenced. Two OpenAPIs were derived from live probes only; UNSW publishes none of its own.
+    Coverage state: gated.'
+  endpoints:
+  - url: https://apideveloper.unsw.edu.au/
+    status: 200
+    note: Azure APIM developer portal; gated.
+  - url: https://apideveloper.unsw.edu.au/apis
+    status: 404
+    note: No public API catalogue.
+  - url: https://unsworks.unsw.edu.au/server/api
+    status: 200
+    note: DSpace 7.0 service document.
+  - url: https://unsworks.unsw.edu.au/server/api/core/items?size=1
+    status: 401
+    note: Item browse gated; discovery search is not.
+  - url: https://unsworks.unsw.edu.au/oai/request?verb=Identify
+    status: 200
+    note: OAI-PMH 2.0 confirmed.
+  - url: https://unsworks.unsw.edu.au/oai/request?verb=ListMetadataFormats
+    status: 200
+    note: Twelve metadata formats.
+  - url: https://aaf.unsw.edu.au/idp/shibboleth
+    status: 200
+    note: SAML 2.0 IdP entity metadata; NEW FIND.
+  - url: https://md.aaf.edu.au/aaf-metadata.xml
+    status: 200
+    note: AAF aggregate; UNSW IdP + AC Lab System SP registered.
+  - url: https://moodle.telt.unsw.edu.au/mod/lti/certs.php
+    status: 200
+    note: LTI 1.3 JWKS; tenant. NEW FIND.
+  - url: https://unsw.primo.exlibrisgroup.com/discovery/search?vid=61UNSW_INST:UNSWS
+    status: 200
+    note: Ex Libris Primo tenancy; no vendor spec saved.
+  - url: https://freerooms.devsoc.app/api/buildings
+    status: 200
+    note: DevSoc campus rooms API; tenant.
+  - url: https://github.com/devsoc-unsw/timetable-scraper
+    status: 200
+    note: ARCHIVED 2026-04-05 by owner.
+  - url: https://github.com/csesoc/handbook-api
+    status: 200
+    note: ARCHIVED 2026-04-03 by owner.
+  - url: https://api.unsw.edu.au/
+    status: 502
+    note: Not catalogued as a surface.
+  - url: https://data.unsw.edu.au/
+    status: 200
+    note: Soft redirect to information-governance; NOT an open data portal.
+  - url: https://resdata.unsw.edu.au/
+    status: 0
+    note: NXDOMAIN; retired 2021.
+  - url: https://www.unsw.edu.au/llms.txt
+    status: 404
+  - url: https://www.unsw.edu.au/.well-known/security.txt
+    status: 404

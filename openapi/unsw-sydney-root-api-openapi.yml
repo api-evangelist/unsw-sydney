@@ -3,33 +3,7 @@ info:
   title: UNSWorks Repository REST Root API
   version: '7.0'
   summary: Institution-operated DSpace 7.0 REST/HAL API for the UNSW open-access institutional repository.
-  description: 'UNSWorks is the University of New South Wales open-access institutional repository. It runs
-
-    DSpace 7.0 on UNSW''s own infrastructure, under UNSW''s own registrable domain
-
-    (unsworks.unsw.edu.au, A record 54.253.215.118 — no vendor CNAME), and is administered by the
-
-    UNSW Library (adminEmail lib.repository.alerts@unsw.edu.au, published in the repository''s own
-
-    OAI-PMH Identify response).
-
-
-    OPERATOR: institution. The DSpace software is open source (LYRASIS); the deployment, the
-
-    hostname, the handle prefix 1959.4 and the content are UNSW''s. This is not a vendor tenancy —
-
-    contrast a `<institution>.figshare.com` style host, which would be `tenant`.
-
-
-    PROVENANCE: UNSW publishes no OpenAPI for this surface. Every path and response below was
-
-    derived from live, unauthenticated probes performed on 2026-08-19; nothing is inferred from
-
-    generic DSpace documentation. Paths that returned 401 unauthenticated are documented as such
-
-    rather than omitted, because the gate is itself the finding.
-
-    '
+  description: UNSWorks is the University of New South Wales open-access institutional repository.
   contact:
     name: UNSW Library — UNSWorks Repository
     email: lib.repository.alerts@unsw.edu.au
@@ -53,13 +27,13 @@ servers:
 - url: https://unsworks.unsw.edu.au/server/api
   description: UNSWorks production DSpace 7.0 REST/HAL server (institution-operated).
 tags:
-- name: root
+- name: Root
   description: Service entry point and HAL link index.
 paths:
   /:
     get:
       tags:
-      - root
+      - Root
       operationId: getRoot
       summary: Repository service document
       description: Returns the DSpace HAL entry point, including dspaceName, dspaceVersion and the full _links index for every sub-resource. Verified 200 on 2026-08-19.

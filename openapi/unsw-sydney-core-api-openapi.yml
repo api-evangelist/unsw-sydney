@@ -3,33 +3,7 @@ info:
   title: UNSWorks Repository REST Core API
   version: '7.0'
   summary: Institution-operated DSpace 7.0 REST/HAL API for the UNSW open-access institutional repository.
-  description: 'UNSWorks is the University of New South Wales open-access institutional repository. It runs
-
-    DSpace 7.0 on UNSW''s own infrastructure, under UNSW''s own registrable domain
-
-    (unsworks.unsw.edu.au, A record 54.253.215.118 — no vendor CNAME), and is administered by the
-
-    UNSW Library (adminEmail lib.repository.alerts@unsw.edu.au, published in the repository''s own
-
-    OAI-PMH Identify response).
-
-
-    OPERATOR: institution. The DSpace software is open source (LYRASIS); the deployment, the
-
-    hostname, the handle prefix 1959.4 and the content are UNSW''s. This is not a vendor tenancy —
-
-    contrast a `<institution>.figshare.com` style host, which would be `tenant`.
-
-
-    PROVENANCE: UNSW publishes no OpenAPI for this surface. Every path and response below was
-
-    derived from live, unauthenticated probes performed on 2026-08-19; nothing is inferred from
-
-    generic DSpace documentation. Paths that returned 401 unauthenticated are documented as such
-
-    rather than omitted, because the gate is itself the finding.
-
-    '
+  description: UNSWorks is the University of New South Wales open-access institutional repository.
   contact:
     name: UNSW Library — UNSWorks Repository
     email: lib.repository.alerts@unsw.edu.au
@@ -53,13 +27,13 @@ servers:
 - url: https://unsworks.unsw.edu.au/server/api
   description: UNSWorks production DSpace 7.0 REST/HAL server (institution-operated).
 tags:
-- name: core
+- name: Core
   description: Communities, collections, sites and the metadata registry.
 paths:
   /core/communities:
     get:
       tags:
-      - core
+      - Core
       operationId: listCommunities
       summary: List top-level and child communities
       description: Verified 200 unauthenticated on 2026-08-19.
@@ -76,7 +50,7 @@ paths:
   /core/collections:
     get:
       tags:
-      - core
+      - Core
       operationId: listCollections
       summary: List collections
       description: Verified 200 unauthenticated on 2026-08-19.
@@ -93,7 +67,7 @@ paths:
   /core/sites:
     get:
       tags:
-      - core
+      - Core
       operationId: listSites
       summary: Repository site object
       description: Verified 200 unauthenticated on 2026-08-19.
@@ -107,7 +81,7 @@ paths:
   /core/metadataschemas:
     get:
       tags:
-      - core
+      - Core
       operationId: listMetadataSchemas
       summary: Metadata schema registry
       description: Returns the metadata schema prefixes registered in this repository. UNSWorks returns dc, eperson, dspace, dcterms, local, unsw, relation, person, project, organization, periodical, creativework, creativeworkseries, publicationissue, publicationvolume, ac, atmire and workflow. Verified 200 unauthenticated on 2026-08-19.
@@ -123,7 +97,7 @@ paths:
   /core/metadatafields/search/byFieldName:
     get:
       tags:
-      - core
+      - Core
       operationId: searchMetadataFields
       summary: Search the metadata field registry by field name
       description: Verified 200 unauthenticated on 2026-08-19.
@@ -146,7 +120,7 @@ paths:
   /core/entitytypes:
     get:
       tags:
-      - core
+      - Core
       operationId: listEntityTypes
       summary: Configured entity types
       description: UNSWorks returns Publication, OrgUnit, Dataset, Journal, JournalVolume and JournalIssue. Note the absence of a Person entity type, which is why the registered person.identifier.orcid field is not evidenced as populated. Verified 200 unauthenticated on 2026-08-19.
@@ -162,7 +136,7 @@ paths:
   /core/items/{uuid}:
     get:
       tags:
-      - core
+      - Core
       operationId: getItem
       summary: Fetch a single item by UUID
       description: Item retrieval by UUID. Probed on 2026-08-19 with a non-existent UUID, which returned the documented 404 error envelope. NOTE the browse form of this resource (GET /core/items without a UUID) returns 401 unauthenticated.
@@ -194,80 +168,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    HalPage:
-      type: object
-      description: Generic DSpace HAL paged envelope.
-      properties:
-        _embedded:
-          type: object
-        page:
-          type: object
-          properties:
-            size:
-              type: integer
-            totalElements:
-              type: integer
-            totalPages:
-              type: integer
-            number:
-              type: integer
-        _links:
-          type: object
-    CommunityPage:
-      allOf:
-      - $ref: '#/components/schemas/HalPage'
-      - type: object
-        properties:
-          _embedded:
-            type: object
-            properties:
-              communities:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Community'
-    MetadataMap:
-      type: object
-      description: DSpace metadata map keyed by qualified field name.
-      additionalProperties:
-        type: array
-        items:
-          type: object
-          properties:
-            value:
-              type: string
-            language:
-              type:
-              - string
-              - 'null'
-            authority:
-              type:
-              - string
-              - 'null'
-            confidence:
-              type: integer
-            place:
-              type: integer
-          required:
-          - value
-    Error:
-      type: object
-      description: Spring Boot error envelope as returned live by UNSWorks.
-      properties:
-        timestamp:
-          type: string
-        status:
-          type: integer
-        error:
-          type: string
-        message:
-          type: string
-        path:
-          type: string
-      required:
-      - timestamp
-      - status
-      - error
-      - path
     Community:
       type: object
       properties:
@@ -294,16 +194,81 @@ components:
       - name
       - handle
       - type
+    CommunityPage:
+      allOf:
+      - $ref: '#/components/schemas/HalPage'
+      - type: object
+        properties:
+          _embedded:
+            type: object
+            properties:
+              communities:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Community'
+    HalPage:
+      type: object
+      description: Generic DSpace HAL paged envelope.
+      properties:
+        _embedded:
+          type: object
+        page:
+          type: object
+          properties:
+            size:
+              type: integer
+            totalElements:
+              type: integer
+            totalPages:
+              type: integer
+            number:
+              type: integer
+        _links:
+          type: object
+    Error:
+      type: object
+      description: Spring Boot error envelope as returned live by UNSWorks.
+      properties:
+        timestamp:
+          type: string
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
+      required:
+      - timestamp
+      - status
+      - error
+      - path
+    MetadataMap:
+      type: object
+      description: DSpace metadata map keyed by qualified field name.
+      additionalProperties:
+        type: array
+        items:
+          type: object
+          properties:
+            value:
+              type: string
+            language:
+              type:
+              - string
+              - 'null'
+            authority:
+              type:
+              - string
+              - 'null'
+            confidence:
+              type: integer
+            place:
+              type: integer
+          required:
+          - value
   parameters:
-    Size:
-      name: size
-      in: query
-      required: false
-      description: Page size.
-      schema:
-        type: integer
-        minimum: 1
-        default: 20
     Page:
       name: page
       in: query
@@ -313,3 +278,12 @@ components:
         type: integer
         minimum: 0
         default: 0
+    Size:
+      name: size
+      in: query
+      required: false
+      description: Page size.
+      schema:
+        type: integer
+        minimum: 1
+        default: 20

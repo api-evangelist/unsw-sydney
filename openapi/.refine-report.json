@@ -1,0 +1,28 @@
+{
+  "provider": "unsw-sydney",
+  "sources": [
+    "_original/unsw-sydney-unsworks-dspace-openapi.yml",
+    "_original/unsw-sydney-unsworks-oai-pmh-openapi.yml"
+  ],
+  "outputs": [
+    "unsw-sydney-core-api-openapi.yml",
+    "unsw-sydney-discover-api-openapi.yml",
+    "unsw-sydney-root-api-openapi.yml",
+    "unsw-sydney-oai-pmh-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "unsw-sydney-unsworks-dspace-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "unsw-sydney-unsworks-oai-pmh-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "unsw-sydney-core-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unsw-sydney-discover-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unsw-sydney-oai-pmh-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unsw-sydney-root-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
