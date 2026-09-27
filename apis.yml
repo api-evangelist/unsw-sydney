@@ -20,15 +20,20 @@ description: 'The University of New South Wales (UNSW Sydney) is a public resear
 type: Index
 deliveryModel:
   model: saas
-  open_source: false
+  license_evidence:
+    not_product:
+    - csesoc/handbook-api
+    - devsoc-unsw/timetable-scraper
+  open_source: unknown
   commercial: true
   callable_host: true
   label: Hosted service · you call their endpoint
-  confidence: high
+  confidence: low
   source:
   - openapi
   - pricing
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: free
@@ -322,7 +327,7 @@ apis:
   name: University of New South Wales Oai Pmh API
   description: OAI-PMH 2.0 verbs, all exercised live against this endpoint.
   humanURL: https://unsworks.unsw.edu.au/
-  baseURL: https://unsworks.unsw.edu.au/server/api
+  baseURL: https://unsworks.unsw.edu.au/oai/request
   tags:
   - OAI-PMH
   tags_raw:
