@@ -1,32 +1,30 @@
-# Kin Score artifact — unsw-sydney — 2026-08-25T154045
+# Kin Score artifact — unsw-sydney — 2026-09-23T000603
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: unsw-sydney
-  schema_version: 0.14.0
-  scored_at: '2026-08-25'
-  run_ts: 2026-08-25T154045
-  composite: 50.7
+  schema_version: 0.22.0
+  scored_at: '2026-09-23'
+  run_ts: 2026-09-23T000603
+  composite: 52.6
   band: developing
   facets:
-    discoverability: 64.8
-    contract_quality: 64.6
-    governance: 15.2
+    discoverability: 59.3
+    contract_quality: 63.7
+    contract_governance: 15.2
     operational_transparency: 23.7
     developer_ergonomics: 38.1
-    commercial_clarity: 50.0
-    contract_governance: 15.2
-    access_clarity: 50.0
+    access_clarity: 63.2
   agent_readiness:
-    score: 28.8
+    score: 33.3
     band: agent-ready
     dimensions:
       spec_presence: true
       agentic_access: false
-      reversibility_documented: false
+      reversibility_documented: na
       mcp_server: false
       auth_clarity: bearer
-      idempotency: false
+      idempotency: na
       error_semantics: verified
       openapi_examples: verified
       rate_limit_signal: documented
@@ -35,7 +33,7 @@ kin_score:
       well_known_catalog: false
       consent_identity: false
       agent_card: false
-      dry_run_mode: false
+      dry_run_mode: na
       delegated_identity: false
       protected_resource_metadata: false
       dynamic_client_registration: false
@@ -49,7 +47,7 @@ kin_score:
   provenance:
     conformance: first-party
     contracts:
-      total: 2
+      total: 4
       derived: 0
       coverage: 100.0
       callable: 100.0
