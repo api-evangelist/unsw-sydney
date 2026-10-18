@@ -151,7 +151,7 @@ apis:
   humanURL: https://moodle.telt.unsw.edu.au/
   baseURL: https://moodle.telt.unsw.edu.au/mod/lti
   tags:
-  - Learning Management
+  - LMS
   - LTI
   - Moodle
   - Tenants
