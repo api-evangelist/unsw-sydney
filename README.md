@@ -1,4 +1,4 @@
-# University of New South Wales (unsw-sydney)
+# University of New South Wales
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,103 +64,151 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The University of New South Wales (UNSW Sydney) is a public research university in Sydney, Australia, and a member of the Group of Eight. This repository catalogs UNSW's public developer and API footprint as an [APIs.json](https://apisjson.org) provider profile, under the **university pipeline** — which settles *who operates* each surface before saving anything, because a university is a federation of buyers and most of what looks like an institutional API is a vendor's contract running under the institution's name.
+The University of New South Wales (UNSW Sydney) is a public research university in Sydney, Australia, and a member of the Group of Eight. Like almost every institution, UNSW is a federation of buyers rather than an API producer, and its programmable footprint has to be read that way. The one substantial platform UNSW runs itself — the Enterprise API Gateway and Developer Portal on Microsoft Azure API Management at apideveloper.unsw.edu.au — is completely gated: onboarding is request-based, the API catalogue is invisible before sign-in, no base URL is disclosed, and the portal states outright that consumers cannot exercise APIs in the portal. The surfaces a member of the public can actually read are three, and all three are institution- operated: the UNSWorks institutional repository REST API (DSpace 7.0, anonymous discovery search, authenticated item browse), its OAI-PMH 2.0 harvesting endpoint exposing twelve metadata formats back to 2007, and the UNSW Shibboleth identity provider whose SAML 2.0 entity metadata is published under the institution's own domain and registered in the Australian Access Federation. Everything else is a tenancy on someone else's platform — an Ex Libris Primo library discovery view, a vendor-hosted Moodle that is a conformant LTI 1.3 platform, a Microsoft Power Apps research-data toolkit — or student-society work on non-institution domains. UNSW publishes no OpenAPI, no open data portal, no status page, no changelog and no API governance ruleset.
 
-APIs.json: https://raw.githubusercontent.com/api-evangelist/unsw-sydney/refs/heads/main/apis.yml
+**Areas:** University · Higher Education · Education · Research · Australia · Group of Eight · Sydney · Research Repository · Identity Federation · Course Catalog · Library · Open Repository
 
-Run it with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=unsw-sydney-api-evangelist&utm_content=repo
+## University of New South Wales on APIs.io
 
-## Type
+Everything profiled for University of New South Wales is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/unsw-sydney/](https://apis.io/providers/unsw-sydney/)** — or go straight to one of the APIs or properties below.
 
-- **Class:** university (`x-type: university`)
-- **Category:** Public Research University
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+### APIs (11)
 
-## Tags
+- [UNSW Shibboleth Identity Provider (AAF / eduGAIN)](https://apis.io/apis/unsw-sydney/shibboleth-idp/) — UNSW's own SAML 2.0 identity provider — a Shibboleth IdP whose entity metadata is published as a machine-readable XML document at the entityID URL and is…
+- [UNSW Enterprise Developer Portal](https://apis.io/apis/unsw-sydney/developer-portal/) — The front door to UNSW's Enterprise API Gateway, built on Microsoft Azure API Management. Cataloguing it is a statement about the gate, not about the APIs…
+- [Moodle @ UNSW (TELT) — LTI 1.3 platform](https://apis.io/apis/unsw-sydney/moodle-lti/) — UNSW's learning management system, operated for UNSW by Open LMS. It is a live, conformant 1EdTech LTI 1.3 platform: the public keyset at /mod/lti/certs.php…
+- [UNSW Library discovery (Ex Libris Primo VE)](https://apis.io/apis/unsw-sydney/primo-discovery/) — UNSW Library's discovery layer runs on Ex Libris Primo VE. This entry records the tenancy so the relationship is visible in the catalogue; no Ex Libris…
+- [Freerooms API (DevSoc, community)](https://apis.io/apis/unsw-sydney/freerooms/) — A live student-society API exposing UNSW campus buildings and teaching rooms with coordinates, capacity, school and usage type — the campus-life surface…
+- [UNSW Timetable API (DevSoc, community) — ARCHIVED](https://apis.io/apis/unsw-sydney/timetable-scraper/) — A scraper and public API for UNSW's timetable site, produced by the UNSW Software Development Society. ARCHIVED BY ITS OWNER ON 2026-04-05 and now…
+- [UNSW Handbook API (CSESoc, community) — ARCHIVED](https://apis.io/apis/unsw-sydney/handbook-api/) — A public API for fetching degree, specialisation and course information from the UNSW Handbook, published by the UNSW Computer Science and Engineering…
+- [University of New South Wales Core API](https://apis.io/apis/unsw-sydney/unsw-sydney-core-api/) — Communities, collections, sites and the metadata registry.
+- [University of New South Wales Discover API](https://apis.io/apis/unsw-sydney/unsw-sydney-discover-api/) — Public discovery search over repository objects.
+- [University of New South Wales Oai Pmh API](https://apis.io/apis/unsw-sydney/unsw-sydney-oai-pmh-api/) — OAI-PMH 2.0 verbs, all exercised live against this endpoint.
+- [University of New South Wales Root API](https://apis.io/apis/unsw-sydney/unsw-sydney-root-api/) — Service entry point and HAL link index.
 
-University, Higher Education, Education, Research, Australia, Group of Eight, Sydney, Research Repository, Identity Federation, Course Catalog, Library, Open Repository
+### Published properties
 
-## Surfaces, by operator
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Every surface carries an `x-operator`. `institution` means UNSW runs the thing the contract describes; `tenant` means UNSW's data on someone else's platform, which is a real institutional fact but not UNSW's engineering.
+#### JSON Schema (1)
 
-### institution
+The data models the API reads and writes.
 
-- **UNSWorks Repository REST API (DSpace 7.0)** — `https://unsworks.unsw.edu.au/server/api`. Anonymous service document, communities, collections, metadata registry, entity types and discovery search; item and bitstream browse return 401. Handles under the UNSW prefix 1959.4. OpenAPI derived from live probes: [openapi/unsw-sydney-unsworks-dspace-openapi.yml](openapi/unsw-sydney-unsworks-dspace-openapi.yml)
-- **UNSWorks Repository OAI-PMH** — `https://unsworks.unsw.edu.au/oai/request`. OAI-PMH 2.0, fully anonymous, twelve metadata formats, records back to 2007-11-06. [openapi/unsw-sydney-unsworks-oai-pmh-openapi.yml](openapi/unsw-sydney-unsworks-oai-pmh-openapi.yml)
-- **UNSW Shibboleth Identity Provider** — `https://aaf.unsw.edu.au/idp/shibboleth`. SAML 2.0 entity metadata published on UNSW's own domain and registered in the Australian Access Federation (an eduGAIN participant). The surface class universities operate by definition and almost nobody catalogues.
-- **UNSW Enterprise Developer Portal** — `https://apideveloper.unsw.edu.au/`. Real, live, and completely gated. Catalogued as a statement about the gate, not about the APIs behind it.
+- [UNSWorks Repository DSpace 7.0 REST payloads](https://apis.io/schemas/unsw-sydney/unsw-sydney-unsworks-dspace/)
 
-### tenant
+#### JSON-LD (1)
 
-- **Moodle @ UNSW (TELT)** — a conformant LTI 1.3 platform on a UNSW hostname, operated for UNSW by Open LMS / Learning Technologies Group.
-- **UNSW Library discovery** — an Ex Libris Primo VE view (`vid=61UNSW_INST:UNSWS`). No Ex Libris specification is saved under this slug.
-- **Freerooms API (DevSoc)** — live student-society campus rooms/buildings API on `devsoc.app`.
-- **UNSW Timetable API (DevSoc)** — **archived 2026-04-05**, read-only.
-- **UNSW Handbook API (CSESoc)** — **archived 2026-04-03**, read-only.
+Linked-data contexts for the provider's vocabulary.
 
-## Domain standards (Kin Score `education` regime)
+- [Unsw Sydney Context](https://apis.io/jsonld/unsw-sydney/unsw-sydney-context/)
 
-Reward-only. A standard is `confirmed` only where a live machine-readable artifact was fetched and read.
+#### Examples (2)
 
-| Standard | Status | Operator | Evidence |
-|---|---|---|---|
-| oai-pmh 2.0 | confirmed | institution | `?verb=Identify` on UNSW's own host |
-| saml 2.0 | confirmed | institution | IdP entity metadata, `protocolSupportEnumeration` |
-| shibboleth | confirmed | institution | `shibmd:Scope` = `unsw.edu.au`, AAF-registered |
-| lti 1.3 | confirmed | tenant | live JWKS at `/mod/lti/certs.php` |
-| orcid | not evidenced | — | field registered, no Person entity type, no populated value |
-| scim, oneroster, ed-fi, caliper, qti, datacite, crossref | not evidenced | — | — |
+Example requests and responses.
 
-Full detail: [conformance/unsw-sydney-education-standards-conformance.yml](conformance/unsw-sydney-education-standards-conformance.yml)
+- [Unsw Sydney Moodle Lti Jwks Example](https://apis.io/examples/unsw-sydney/unsw-sydney-moodle-lti-jwks-example/)
+- [Unsw Sydney Unsworks Dspace Example](https://apis.io/examples/unsw-sydney/unsw-sydney-unsworks-dspace-example/)
 
-## Artifacts
+#### Governance rules (1)
 
-- OpenAPI: [openapi/](openapi/) (pristine pre-refine copies in [openapi/_original/](openapi/_original/))
-- JSON Schema: [json-schema/unsw-sydney-unsworks-dspace-schema.json](json-schema/unsw-sydney-unsworks-dspace-schema.json)
-- Examples: [examples/](examples/) — verbatim captured live responses
-- Vocabulary: [vocabulary/unsw-sydney-unsworks-vocabulary.yml](vocabulary/unsw-sydney-unsworks-vocabulary.yml)
-- Rules: [rules/unsw-sydney-rules.yml](rules/unsw-sydney-rules.yml)
-- Authentication: [authentication/unsw-sydney-authentication.yml](authentication/unsw-sydney-authentication.yml)
-- Scopes: [scopes/unsw-sydney-scopes.yml](scopes/unsw-sydney-scopes.yml) — recorded absence
-- Errors: [errors/unsw-sydney-errors.yml](errors/unsw-sydney-errors.yml)
-- Conformance: [conformance/unsw-sydney-education-standards-conformance.yml](conformance/unsw-sydney-education-standards-conformance.yml)
-- Lifecycle: [lifecycle/unsw-sydney-lifecycle.yml](lifecycle/unsw-sydney-lifecycle.yml)
-- Plans & Pricing: [plans/unsw-sydney-plans-pricing.yml](plans/unsw-sydney-plans-pricing.yml)
-- Rate Limits: [rate-limits/unsw-sydney-rate-limits.yml](rate-limits/unsw-sydney-rate-limits.yml)
-- FinOps: [finops/unsw-sydney-finops.yml](finops/unsw-sydney-finops.yml)
+Spectral rulesets for the provider's contracts.
 
-Every artifact carries `generated`, `method` and `source`. Nothing here is inferred from software documentation — every path, parameter, response and error code was observed in a live response on 2026-08-19.
+- [University of New South Wales API Rules](https://apis.io/rules/unsw-sydney/unsw-sydney-rules/)
 
-## Timestamps
+#### Security (2)
 
-- Created: 2026-06-03
-- Modified: 2026-08-19
+Authentication, trust centre, and vulnerability disclosure.
 
-## Common Properties
+- [Unsw Sydney Authentication](https://apis.io/security/unsw-sydney/unsw-sydney-authentication/)
+- [Unsw Sydney Domain Security](https://apis.io/security/unsw-sydney/unsw-sydney-domain-security/)
 
-- Website: https://www.unsw.edu.au/
-- Developer Portal: https://apideveloper.unsw.edu.au/
-- Research Repository: https://unsworks.unsw.edu.au/
-- Identity Federation: https://aaf.unsw.edu.au/idp/shibboleth
-- Research Computing (Katana): https://docs.restech.unsw.edu.au/
-- Library: https://www.library.unsw.edu.au/
-- Course Catalog (Handbook): https://www.handbook.unsw.edu.au/
-- AI Policy: https://www.teaching.unsw.edu.au/ai/guidelines
-- AI Tooling: https://www.unsw.edu.au/myit/emerging-technologies/ai
-- GitHub Organization: https://github.com/unsw-edu-au
-- LinkedIn: https://www.linkedin.com/school/unsw/
+#### OAuth scopes (1)
 
-## Coverage
+The permissions the API asks for.
 
-`gated`. UNSW's one substantial institution-operated API platform cannot be read without authorisation, and authorisation is manual. Everything that could be read was read completely. Nothing was blocked by bot protection. UNSW operates **no open data portal** (`data.unsw.edu.au` redirects to an information-governance page), and publishes no OpenAPI, no status page, no changelog, no `llms.txt` and no `security.txt`. A thin profile here is a correct measurement of UNSW's publishing posture, not a gap in the sweep.
+- [Unsw Sydney Scopes](https://apis.io/scopes/unsw-sydney/unsw-sydney-scopes/)
 
-## Notes
+#### Plans and pricing (1)
 
-Corrections made in the 2026-08-19 re-profile: both community APIs previously listed as live have since been **archived by their owners** and are recorded as such; the GitHub organization pointer moved from the DevSoc student society to UNSW's own `unsw-edu-au` org; the UNSW Shibboleth IdP and the Ex Libris Primo tenancy were found and added; and every surface now carries `x-operator` with the evidence that settled it. `api.unsw.edu.au` returns 502 and is deliberately **not** catalogued as a surface. `resdata.unsw.edu.au` no longer resolves (retired 2021). LinkedIn returns HTTP 999 due to bot-blocking, which grades live, not dead. No endpoints, parameters, or properties were fabricated.
+Published plans, tiers and prices.
 
-## Maintainers
+- [Unsw Sydney Plans Pricing](https://apis.io/plans/unsw-sydney/unsw-sydney-plans-pricing/)
 
-- Kin Lane — kin@apievangelist.com
+#### Rate limits (1)
+
+Published request limits.
+
+- [Unsw Sydney Rate Limits](https://apis.io/rate-limits/unsw-sydney/unsw-sydney-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Unsw Sydney Finops](https://apis.io/finops/unsw-sydney/unsw-sydney-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.unsw.edu.au/)
+- [Documentation](https://apideveloper.unsw.edu.au/getting-started)
+- [Support](https://www.unsw.edu.au/myit)
+- [Blog](https://www.unsw.edu.au/newsroom)
+- [Terms of service](https://www.unsw.edu.au/copyright-disclaimer)
+- [Privacy policy](https://www.unsw.edu.au/privacy)
+- [GitHub](https://github.com/unsw-edu-au)
+
+## API Evangelist rating
+
+**Kin Score 40.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 55.8 |
+| Contract governance | 15.2 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 38.1 |
+| Access clarity | 39.5 |
+
+**Agent readiness 32.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 34.3** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/unsw-sydney/](https://apis.io/providers/unsw-sydney/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for University of New South Wales: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/unsw-sydney/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
